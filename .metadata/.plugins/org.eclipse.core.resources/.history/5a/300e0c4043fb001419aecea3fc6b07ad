@@ -13,7 +13,7 @@ public class ConsoleGame {
 	{
 		boolean keepPlaying = true;
 		while (keepPlaying){
-			b.printForP1();
+			b.print();
 			keepPlaying = false;
 		}
 		System.out.println("Goodbye");

@@ -43,9 +43,11 @@ public class Board {
 		for (int j=7; j>-1; j--){
 			System.out.print("|\t");
 			for (int i=7; i>-1; i--){
+				
 				if (board[j][i] == null) System.out.println("null\t");
 		    	if (board[j][i].equals("-")) System.out.print("-\t");
 		    	else System.out.print(board[j][i].toString()+"\t");
+				
 			}
 			System.out.print("|\n\n");
 		}

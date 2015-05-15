@@ -20,7 +20,8 @@ public class Board {
 	public void setBoard(String[][] b) { board = b; }
 	
 	
-	public static void printForP1()
+	
+	public static void print()
 	{
 		System.out.println("-------------------------------------------------------------------------");
 		for (String[] row : board)
@@ -33,21 +34,6 @@ public class Board {
 		    	else System.out.print(value+"\t");
 		    }
 		    System.out.print("|\n\n");
-		}
-		System.out.println("-------------------------------------------------------------------------");
-	}
-	
-	public static void printForP2()
-	{
-		System.out.println("-------------------------------------------------------------------------");
-		for (int j=7; j>-1; j--){
-			System.out.print("|\t");
-			for (int i=7; i>-1; i--){
-				if (board[j][i] == null) System.out.println("null\t");
-		    	if (board[j][i].equals("-")) System.out.print("-\t");
-		    	else System.out.print(board[j][i].toString()+"\t");
-			}
-			System.out.print("|\n\n");
 		}
 		System.out.println("-------------------------------------------------------------------------");
 	}
