@@ -1,0 +1,6 @@
+package chess;
+
+public class ConsoleGame {
+	
+	public static void main(String[] args){ ConsoleGame cg = new ConsoleGame(); };
+}
