@@ -1,0 +1,25 @@
+package chess;
+
+public class ConsoleGame {
+	private static Board b;
+	
+	public ConsoleGame()
+	{
+		/*b = new Board();
+		startGame();*/
+		char x = 1;
+		System.out.println(x);
+	}
+	
+	private static void startGame()
+	{
+		boolean keepPlaying = true;
+		while (keepPlaying){
+			b.printForP2();
+			keepPlaying = false;
+		}
+		System.out.println("Goodbye");
+	}
+	
+	public static void main(String[] args){ ConsoleGame cg = new ConsoleGame(); }
+}
