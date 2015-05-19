@@ -1,5 +1,5 @@
 package chess;
-//import java.util.ArrayList;
+import java.util.ArrayList;
 
 public class Board {
 	private static String[][] board;
@@ -18,7 +18,6 @@ public class Board {
 	
 	public String[][] getBoard() { return board; }
 	public void setBoard(String[][] b) { board = b; }
-	
 	
 	public static void printForP1()
 	{
@@ -56,6 +55,25 @@ public class Board {
 		}
 		System.out.println("---------------------------------------------------------------------------");
 		System.out.println("\th\tg\tf\te\td\tc\tb\ta\t\n");
+	}
+	
+	public enum ChessPiece {
+		//possible pieces or empty tiles
+		WHITE_CASTLE("w_c"), WHITE_KNIGHT("w_h"), WHITE_BISHOP("w_b"), WHITE_QUEEN("w_q"), WHITE_KING("w_k"), WHITE_PAWN("w_p"),
+		BLACK_CASTLE("b_c"), BLACK_KNIGHT("b_h"), BLACK_BISHOP("b_b"), BLACK_QUEEN("b_q"), BLACK_KING("b_k"), BLACK_PAWN("b_p"), 
+		EMPTY("-");
 		
+		private String str;
+		private String getStr(){ return str; }
+		
+		private ChessPiece(String s){ this.str=s; }
+		
+		private static ArrayList<Move> possibleMoves(String[][] b){
+			ArrayList<Move> temp = new ArrayList<Move>();
+			
+			
+			
+			return temp;
+		}
 	}
 }

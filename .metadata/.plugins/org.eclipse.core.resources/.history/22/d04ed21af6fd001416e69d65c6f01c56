@@ -1,0 +1,13 @@
+package chess;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import javax.swing.*;
+import javax.imageio.ImageIO;
+
+public class Game {
+	Runnable r = new Runnable() {
+		
+	}
+}
