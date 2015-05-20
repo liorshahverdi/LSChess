@@ -73,14 +73,9 @@ public class Game extends JLayeredPane {
             for (int col = 0; col < GRID_COLS; col++) {
                 panelGrid[row][col] = new JPanel(new GridBagLayout());
                 backingPanel.add(panelGrid[row][col]);
-                if (row==0 || row==2 || row==4 || row==6){
-                	if (col%2==0) panelGrid[row][col].setBackground(Color.white);
-                	else panelGrid[row][col].setBackground(Color.gray);
-                }
-                else{
-                	if (col%2==0) panelGrid[row][col].setBackground(Color.gray);
-                	else panelGrid[row][col].setBackground(Color.white);
-                }
+                
+                
+                
                 k++;
             }
         }
