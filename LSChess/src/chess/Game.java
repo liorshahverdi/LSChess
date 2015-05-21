@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Game extends JLayeredPane {
-    public static final int WIDTH = 780;
+    public static final int WIDTH = 1080;
     public static final int HEIGHT = 780;
     private static final int GRID_ROWS = 8;
     private static final int GRID_COLS = 8;
@@ -210,8 +210,14 @@ public class Game extends JLayeredPane {
                     clickedPanel.add(dragLabel);
                     clickedPanel.revalidate();
                 } else {
-                    droppedPanel.add(dragLabel);
-                    droppedPanel.revalidate();
+                	Component[] theseComponents = droppedPanel.getComponents();
+                	if (theseComponents.length != 0){
+                		clickedPanel.add(dragLabel);
+                		clickedPanel.revalidate();
+                	} else{
+                		droppedPanel.add(dragLabel);
+                        droppedPanel.revalidate();
+                	}
                 }
             }
 
