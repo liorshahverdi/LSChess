@@ -3,6 +3,7 @@ package chess;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import chess.Board.ChessPiece;
 
 public class Game extends JLayeredPane {
     public static final int WIDTH = 1080;
@@ -14,9 +15,11 @@ public class Game extends JLayeredPane {
     private static final Dimension LABEL_SIZE = new Dimension(60, 40);
     private GridLayout gridlayout = new GridLayout(GRID_ROWS, GRID_COLS, GAP, GAP);
     private JPanel backingPanel = new JPanel(gridlayout);
-    private JPanel[][] panelGrid = new JPanel[GRID_ROWS][GRID_COLS];
+    private static JPanel[][] panelGrid = new JPanel[GRID_ROWS][GRID_COLS];
     
-    private ImageIcon black_castle_img = new ImageIcon("Images\\black-castle.png");
+    private static Board b = new Board();
+    
+    /*private ImageIcon black_castle_img = new ImageIcon("Images\\black-castle.png");
     private JLabel blackCastle1 = new JLabel(black_castle_img);
     private JLabel blackCastle2 = new JLabel(black_castle_img);
     private ImageIcon black_bishop_img = new ImageIcon("Images\\black-bishop.png");
@@ -60,7 +63,10 @@ public class Game extends JLayeredPane {
     private JLabel whitePawn5 = new JLabel(white_pawn_img);
     private JLabel whitePawn6 = new JLabel(white_pawn_img);
     private JLabel whitePawn7 = new JLabel(white_pawn_img);
-    private JLabel whitePawn8 = new JLabel(white_pawn_img);
+    private JLabel whitePawn8 = new JLabel(white_pawn_img);*/
+    
+    /*private ImageIcon possible_move_img = new ImageIcon("Images\\possible-move.png");
+    private JLabel possibleMove = new JLabel(possible_move_img);*/
     
     public Game() {
         backingPanel.setSize(LAYERED_PANE_SIZE);
@@ -95,7 +101,7 @@ public class Game extends JLayeredPane {
         blueLabel.setPreferredSize(LABEL_SIZE);
         panelGrid[1][1].add(blueLabel); */
         
-        panelGrid[0][0].add(blackCastle1);
+        /*panelGrid[0][0].add(blackCastle1);
         panelGrid[0][1].add(blackHorse1);
         panelGrid[0][2].add(blackBishop1);
         panelGrid[0][3].add(blackQueen);
@@ -127,8 +133,10 @@ public class Game extends JLayeredPane {
         panelGrid[6][4].add(whitePawn5);
         panelGrid[6][5].add(whitePawn6);
         panelGrid[6][6].add(whitePawn7);
-        panelGrid[6][7].add(whitePawn8);
+        panelGrid[6][7].add(whitePawn8);*/
        
+        
+        
         backingPanel.setBorder(BorderFactory.createEmptyBorder(GAP, GAP, GAP, GAP));
         setPreferredSize(LAYERED_PANE_SIZE);
         add(backingPanel, JLayeredPane.DEFAULT_LAYER);
@@ -142,6 +150,15 @@ public class Game extends JLayeredPane {
         private int dragLabelWidthDiv2;
         private int dragLabelHeightDiv2;
         private JPanel clickedPanel = null;
+        
+        @Override
+        public void mouseClicked(MouseEvent me){
+        	//generate all possible moves at this turn, for this piece and this player
+        	
+        	
+        	//display only the moves specific to clicked piece
+        	
+        }
 
         @Override
         public void mousePressed(MouseEvent me) {
@@ -163,6 +180,7 @@ public class Game extends JLayeredPane {
                 dragLabelHeightDiv2 = dragLabel.getHeight() / 2;
 
                 int x = me.getPoint().x - dragLabelWidthDiv2;
+                
                 int y = me.getPoint().y - dragLabelHeightDiv2;
                 dragLabel.setLocation(x, y);
                 add(dragLabel, JLayeredPane.DRAG_LAYER);
@@ -225,6 +243,57 @@ public class Game extends JLayeredPane {
             dragLabel = null;
         }
     }
+    
+    private static void loadDataToBoardUI(){
+    	int k = 0;
+    	for (String[] x : b.getBoard()){
+    		for (String p : x){
+				BoardCell translated = BoardCell.translate(k);
+    			if (p.equals("b_c")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new BlackCastle());
+    			}
+    			if (p.equals("b_h")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new BlackHorse());
+    			}
+    			if (p.equals("b_b")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new BlackBishop());
+    			}
+    			if (p.equals("b_q")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new BlackQueen());
+    			}
+    			if (p.equals("b_k")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new BlackKing());
+    			}
+    			if (p.equals("b_p")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new BlackPawn());
+    			}
+    			if (p.equals("w_p")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new WhitePawn());
+    			}
+    			if (p.equals("w_c")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new WhiteCastle());
+    			}
+    			if (p.equals("w_h")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new WhiteHorse());
+    			}
+    			if (p.equals("w_b")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new WhiteBishop());
+    			}
+    			if (p.equals("w_q")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new WhiteQueen());
+    			}
+    			if (p.equals("w_k")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new WhiteKing());
+    			}
+    			k++;
+    		}
+    	}
+    	
+    }
+    
+    private static void startGameLoop(){
+    	
+    }
 
     private static void createAndShowUI() {
         JFrame frame = new JFrame("Chess");
@@ -234,11 +303,14 @@ public class Game extends JLayeredPane {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+    
 
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 createAndShowUI();
+                loadDataToBoardUI();
+                startGameLoop();
             }
         });
     }

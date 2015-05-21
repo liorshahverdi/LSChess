@@ -1,17 +1,28 @@
 package chess;
 
 public class BoardCell {
-	private char row;
-	private char col;
+	private int row;
+	private int col;
 
-	public BoardCell(char r, char c) {
+	public BoardCell(int r, int c) {
 		row = r;
 		col = c;
 	}
 
-	public char getRow() { return row; }
+	public int getRow() { return row; }
 
-	public char getCol() { return col; }
+	public int getCol() { return col; }
 
+	public static BoardCell translate(int k)
+	{
+		BoardCell temp;
+		
+		int row = k/8;
+		int col = k%8;
+		temp = new BoardCell(row,col);
+		
+		return temp;
+	}
+	
 	public String toString() { return "row = "+row+" col = "+col; }
 }

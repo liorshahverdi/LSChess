@@ -6,14 +6,14 @@ public class Board {
 	
 	public Board(){
 		board = new String[][] { 
-				{"b_c","b_h","b_b","b_k","b_q","b_b","b_h","b_c"},
+				{"b_c","b_h","b_b","b_q","b_k","b_b","b_h","b_c"},
 				{"b_p","b_p","b_p","b_p","b_p","b_p","b_p","b_p"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"w_p","w_p","w_p","w_p","w_p","w_p","w_p","w_p"},
-				{"w_c","w_h","w_b","w_k","w_q","w_b","w_h","w_c"} };
+				{"w_c","w_h","w_b","w_q","w_k","w_b","w_h","w_c"} };
 	}
 	
 	public String[][] getBoard() { return board; }
