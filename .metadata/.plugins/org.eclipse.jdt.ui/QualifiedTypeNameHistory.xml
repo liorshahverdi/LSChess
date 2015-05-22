@@ -2,4 +2,5 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.awt.EventQueue"/>
+<fullyQualifiedTypeName name="chess.Board.ChessPiece"/>
 </qualifiedTypeNameHistroy>

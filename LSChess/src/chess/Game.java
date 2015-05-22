@@ -19,54 +19,8 @@ public class Game extends JLayeredPane {
     
     private static Board b = new Board();
     
-    /*private ImageIcon black_castle_img = new ImageIcon("Images\\black-castle.png");
-    private JLabel blackCastle1 = new JLabel(black_castle_img);
-    private JLabel blackCastle2 = new JLabel(black_castle_img);
-    private ImageIcon black_bishop_img = new ImageIcon("Images\\black-bishop.png");
-    private JLabel blackBishop1 = new JLabel(black_bishop_img);
-    private JLabel blackBishop2 = new JLabel(black_bishop_img);
-    private ImageIcon black_horse_img = new ImageIcon("Images\\black-horse.png");
-    private JLabel blackHorse1 = new JLabel(black_horse_img);
-    private JLabel blackHorse2 = new JLabel(black_horse_img);
-    private ImageIcon black_queen_img = new ImageIcon("Images\\black-queen.png");
-    private JLabel blackQueen = new JLabel(black_queen_img);
-    private ImageIcon black_king_img = new ImageIcon("Images\\black-king.png");
-    private JLabel blackKing = new JLabel(black_king_img);
-    private ImageIcon black_pawn_img = new ImageIcon("Images\\black-pawn.png");
-    private JLabel blackPawn1 = new JLabel(black_pawn_img);
-    private JLabel blackPawn2 = new JLabel(black_pawn_img);
-    private JLabel blackPawn3 = new JLabel(black_pawn_img);
-    private JLabel blackPawn4 = new JLabel(black_pawn_img);
-    private JLabel blackPawn5 = new JLabel(black_pawn_img);
-    private JLabel blackPawn6 = new JLabel(black_pawn_img);
-    private JLabel blackPawn7 = new JLabel(black_pawn_img);
-    private JLabel blackPawn8 = new JLabel(black_pawn_img);
-    
-    private ImageIcon white_castle_img = new ImageIcon("Images\\white-castle.png");
-    private JLabel whiteCastle1 = new JLabel(white_castle_img);
-    private JLabel whiteCastle2 = new JLabel(white_castle_img);
-    private ImageIcon white_bishop_img = new ImageIcon("Images\\white-bishop.png");
-    private JLabel whiteBishop1 = new JLabel(white_bishop_img);
-    private JLabel whiteBishop2 = new JLabel(white_bishop_img);
-    private ImageIcon white_horse_img = new ImageIcon("Images\\white-horse.png");
-    private JLabel whiteHorse1 = new JLabel(white_horse_img);
-    private JLabel whiteHorse2 = new JLabel(white_horse_img);
-    private ImageIcon white_queen_img = new ImageIcon("Images\\white-queen.png");
-    private JLabel whiteQueen = new JLabel(white_queen_img);
-    private ImageIcon white_king_img = new ImageIcon("Images\\white-king.png");
-    private JLabel whiteKing = new JLabel(white_king_img);
-    private ImageIcon white_pawn_img = new ImageIcon("Images\\white-pawn.png");
-    private JLabel whitePawn1 = new JLabel(white_pawn_img);
-    private JLabel whitePawn2 = new JLabel(white_pawn_img);
-    private JLabel whitePawn3 = new JLabel(white_pawn_img);
-    private JLabel whitePawn4 = new JLabel(white_pawn_img);
-    private JLabel whitePawn5 = new JLabel(white_pawn_img);
-    private JLabel whitePawn6 = new JLabel(white_pawn_img);
-    private JLabel whitePawn7 = new JLabel(white_pawn_img);
-    private JLabel whitePawn8 = new JLabel(white_pawn_img);*/
-    
-    /*private ImageIcon possible_move_img = new ImageIcon("Images\\possible-move.png");
-    private JLabel possibleMove = new JLabel(possible_move_img);*/
+    private static int ct;
+    boolean validPieceSelected = false;
     
     public Game() {
         backingPanel.setSize(LAYERED_PANE_SIZE);
@@ -74,7 +28,7 @@ public class Game extends JLayeredPane {
         backingPanel.setBackground(Color.gray);
         
         int k=0;
-        
+        ct = 0;
         for (int row = 0; row < GRID_ROWS; row++) {
             for (int col = 0; col < GRID_COLS; col++) {
                 panelGrid[row][col] = new JPanel(new GridBagLayout());
@@ -90,52 +44,6 @@ public class Game extends JLayeredPane {
                 k++;
             }
         }
-        
-        /*redLabel.setOpaque(true);
-        redLabel.setBackground(Color.red.brighter().brighter());
-        redLabel.setPreferredSize(LABEL_SIZE);
-        panelGrid[4][3].add(redLabel);
-
-        blueLabel.setOpaque(true);
-        blueLabel.setBackground(Color.blue.brighter().brighter());
-        blueLabel.setPreferredSize(LABEL_SIZE);
-        panelGrid[1][1].add(blueLabel); */
-        
-        /*panelGrid[0][0].add(blackCastle1);
-        panelGrid[0][1].add(blackHorse1);
-        panelGrid[0][2].add(blackBishop1);
-        panelGrid[0][3].add(blackQueen);
-        panelGrid[0][4].add(blackKing);
-        panelGrid[0][5].add(blackBishop2);
-        panelGrid[0][6].add(blackHorse2);
-        panelGrid[0][7].add(blackCastle2);
-        panelGrid[1][0].add(blackPawn1);
-        panelGrid[1][1].add(blackPawn2);
-        panelGrid[1][2].add(blackPawn3);
-        panelGrid[1][3].add(blackPawn4);
-        panelGrid[1][4].add(blackPawn5);
-        panelGrid[1][5].add(blackPawn6);
-        panelGrid[1][6].add(blackPawn7);
-        panelGrid[1][7].add(blackPawn8);
-        
-        panelGrid[7][0].add(whiteCastle1);
-        panelGrid[7][7].add(whiteCastle2);
-        panelGrid[7][2].add(whiteBishop1);
-        panelGrid[7][5].add(whiteBishop2);
-        panelGrid[7][1].add(whiteHorse1);
-        panelGrid[7][6].add(whiteHorse2);
-        panelGrid[7][3].add(whiteQueen);
-        panelGrid[7][4].add(whiteKing);
-        panelGrid[6][0].add(whitePawn1);
-        panelGrid[6][1].add(whitePawn2);
-        panelGrid[6][2].add(whitePawn3);
-        panelGrid[6][3].add(whitePawn4);
-        panelGrid[6][4].add(whitePawn5);
-        panelGrid[6][5].add(whitePawn6);
-        panelGrid[6][6].add(whitePawn7);
-        panelGrid[6][7].add(whitePawn8);*/
-       
-        
         
         backingPanel.setBorder(BorderFactory.createEmptyBorder(GAP, GAP, GAP, GAP));
         setPreferredSize(LAYERED_PANE_SIZE);
@@ -154,16 +62,24 @@ public class Game extends JLayeredPane {
         @Override
         public void mouseClicked(MouseEvent me){
         	//generate all possible moves at this turn, for this piece and this player
-        	
+            clickedPanel = (JPanel) backingPanel.getComponentAt(me.getPoint());
+            Component[] components = clickedPanel.getComponents();
+            
+            
+            if (components[0] instanceof WhitePawn) System.out.println("white pawn");
+        	if (components[0] instanceof WhiteCastle) System.out.println("white castle");
+        	if (components[0] instanceof WhiteBishop) System.out.println("white bishop");
+        	if (components[0] instanceof WhiteHorse) System.out.println("white horse");
+        	if (components[0] instanceof WhiteQueen) System.out.println("white queen");
+        	if (components[0] instanceof WhiteKing) System.out.println("white king");
         	
         	//display only the moves specific to clicked piece
-        	
         }
 
         @Override
         public void mousePressed(MouseEvent me) {
             clickedPanel = (JPanel) backingPanel.getComponentAt(me.getPoint());
-            Component[] components = clickedPanel.getComponents();
+            Component[] components = clickedPanel.getComponents(); 
             if (components.length == 0) {
                 return;
             }
@@ -180,7 +96,6 @@ public class Game extends JLayeredPane {
                 dragLabelHeightDiv2 = dragLabel.getHeight() / 2;
 
                 int x = me.getPoint().x - dragLabelWidthDiv2;
-                
                 int y = me.getPoint().y - dragLabelHeightDiv2;
                 dragLabel.setLocation(x, y);
                 add(dragLabel, JLayeredPane.DRAG_LAYER);
@@ -292,7 +207,18 @@ public class Game extends JLayeredPane {
     }
     
     private static void startGameLoop(){
-    	
+    	boolean keepPlaying = true;
+    	while (keepPlaying){
+    		
+    		/*if (gameOver()){
+    			keepPlaying = false;
+    			
+    			break;
+    		}else{
+    			waitForValInput();
+    			ct++;
+    		}*/
+    	}
     }
 
     private static void createAndShowUI() {

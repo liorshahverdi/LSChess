@@ -68,12 +68,7 @@ public class Board {
 		
 		private ChessPiece(String s){ this.str=s; }
 		
-		private static ArrayList<Move> possibleMoves(String[][] b){
-			ArrayList<Move> temp = new ArrayList<Move>();
-			
-			
-			
-			return temp;
-		}
+		
+		
 	}
 }
