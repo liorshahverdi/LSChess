@@ -3,7 +3,6 @@ package chess;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.util.*;
 import chess.Board.ChessPiece;
 
 public class Game extends JLayeredPane {
@@ -21,9 +20,6 @@ public class Game extends JLayeredPane {
     private static Board b = new Board();
     
     private static int ct;
-    private static boolean isBlacksTurn;
-    private static boolean isWhitesTurn;
-    
     boolean validPieceSelected = false;
     
     public Game() {
@@ -56,6 +52,29 @@ public class Game extends JLayeredPane {
         addMouseListener(myMouseAdapter);
         addMouseMotionListener(myMouseAdapter);
     }
+    
+    private static boolean isThisPlayersPiece(Component c){
+    	if (ct%2==0){
+    		if (c instanceof WhitePawn ||
+    			c instanceof WhiteCastle ||
+    			c instanceof WhiteBishop ||
+    			c instanceof WhiteHorse ||
+    			c instanceof WhiteQueen ||
+    			c instanceof WhiteKing) return true;
+    		
+    		return false;
+    	}
+    	else{
+    		if (c instanceof BlackPawn ||
+        			c instanceof BlackCastle ||
+        			c instanceof BlackBishop ||
+        			c instanceof BlackHorse ||
+        			c instanceof BlackQueen ||
+        			c instanceof BlackKing) return true;
+    		
+    		return false;
+    	}
+    }
 
     private class MyMouseAdapter extends MouseAdapter {
         private JLabel dragLabel = null;
@@ -65,9 +84,19 @@ public class Game extends JLayeredPane {
         
         @Override
         public void mouseClicked(MouseEvent me){
-            //if a piece has not already been selected in this turn, select this piece
-        	//and display it's possible moves if it's a piece owned by the player with the current turn
+        	//generate all possible moves at this turn, for this piece and this player
+            clickedPanel = (JPanel) backingPanel.getComponentAt(me.getPoint());
+            Component[] components = clickedPanel.getComponents();
+            
+            
+            if (components[0] instanceof WhitePawn) System.out.println("white pawn");
+        	if (components[0] instanceof WhiteCastle) System.out.println("white castle");
+        	if (components[0] instanceof WhiteBishop) System.out.println("white bishop");
+        	if (components[0] instanceof WhiteHorse) System.out.println("white horse");
+        	if (components[0] instanceof WhiteQueen) System.out.println("white queen");
+        	if (components[0] instanceof WhiteKing) System.out.println("white king");
         	
+        	//display only the moves specific to clicked piece
         }
 
         @Override
@@ -200,35 +229,19 @@ public class Game extends JLayeredPane {
     	
     }
     
-    private static ArrayList<Move> possibleAndEditedMoves(Board x){
-    	ArrayList<Move> temp=null;
-    	
-    	
-    	
-    	return temp;
-    }
-    
-    private static boolean gameOver(){
-    	ArrayList<Move> moves;
-    	moves = possibleAndEditedMoves(b);
-    	
-    	return false;
-    }
-    
     private static void startGameLoop(){
     	boolean keepPlaying = true;
     	while (keepPlaying){
     		
-    		if (gameOver()){
+    		/*if (gameOver()){
     			keepPlaying = false;
     			
     			break;
     		}else{
-    			
-    			if 
-    			//waitForValInput();
-    			
-    		}
+    			waitForValInput();
+    			ct++;
+    		}*/
+    		ct++;
     		keepPlaying = false;
     	}
     	

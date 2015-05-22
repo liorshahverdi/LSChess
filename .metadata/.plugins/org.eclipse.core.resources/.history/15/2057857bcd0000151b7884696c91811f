@@ -21,9 +21,6 @@ public class Game extends JLayeredPane {
     private static Board b = new Board();
     
     private static int ct;
-    private static boolean isBlacksTurn;
-    private static boolean isWhitesTurn;
-    
     boolean validPieceSelected = false;
     
     public Game() {
@@ -56,6 +53,10 @@ public class Game extends JLayeredPane {
         addMouseListener(myMouseAdapter);
         addMouseMotionListener(myMouseAdapter);
     }
+    
+    private static boolean isThisPlayersPiece(Component c){
+    	return false;
+    }
 
     private class MyMouseAdapter extends MouseAdapter {
         private JLabel dragLabel = null;
@@ -65,9 +66,13 @@ public class Game extends JLayeredPane {
         
         @Override
         public void mouseClicked(MouseEvent me){
-            //if a piece has not already been selected in this turn, select this piece
-        	//and display it's possible moves if it's a piece owned by the player with the current turn
+        	//generate all possible moves at this turn, for this piece and this player
+            clickedPanel = (JPanel) backingPanel.getComponentAt(me.getPoint());
+            Component[] components = clickedPanel.getComponents();
+            
+            if (isThisPlayersPiece(components[0])) System.out.println("True!");
         	
+        	//display only the moves specific to clicked piece
         }
 
         @Override
@@ -200,17 +205,8 @@ public class Game extends JLayeredPane {
     	
     }
     
-    private static ArrayList<Move> possibleAndEditedMoves(Board x){
-    	ArrayList<Move> temp=null;
-    	
-    	
-    	
-    	return temp;
-    }
-    
     private static boolean gameOver(){
     	ArrayList<Move> moves;
-    	moves = possibleAndEditedMoves(b);
     	
     	return false;
     }
@@ -224,10 +220,8 @@ public class Game extends JLayeredPane {
     			
     			break;
     		}else{
-    			
-    			if 
     			//waitForValInput();
-    			
+    			ct++;
     		}
     		keepPlaying = false;
     	}
