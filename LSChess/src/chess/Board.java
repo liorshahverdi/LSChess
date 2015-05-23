@@ -68,7 +68,8 @@ public class Board {
 		
 		private ChessPiece(String s){ this.str=s; }
 		
-		
-		
+		public static ArrayList<Move> possibleMoves(){
+			return null;
+		}
 	}
 }
