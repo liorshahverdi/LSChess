@@ -1,0 +1,6 @@
+package chess;
+
+import java.util.*;
+public abstract class ChessPiece {
+	
+}
