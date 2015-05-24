@@ -10,16 +10,9 @@ public class WhitePawn extends JLabel implements Piece{
 	private BoardCell currentCellOccupied;
 	
 	public void setCurrentCellOccupied(BoardCell x){ this.currentCellOccupied = x; }
+	public BoardCell getCurrentCellOccupied() { return currentCellOccupied; }
 	
 	public WhitePawn(){
 		super(img);
 	}
-
-	@Override
-	public ArrayList<Move> possibleMoves() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
 }

@@ -1,0 +1,31 @@
+package chess;
+
+import javax.swing.*;
+
+import java.awt.*;
+import java.util.ArrayList;
+
+public class WhitePawn extends JLabel implements Piece{
+	private static ImageIcon img = new ImageIcon("Images\\white-pawn.png");
+	private BoardCell currentCellOccupied;
+	
+	public void setCurrentCellOccupied(BoardCell x){ this.currentCellOccupied = x; }
+	
+	public WhitePawn(){
+		super(img);
+	}
+
+	@Override
+	public ArrayList<BoardCell> possibleMoves() {
+		// TODO Auto-generated method stub
+		ArrayList<BoardCell> temp = new ArrayList<BoardCell>();
+		if (currentCellOccupied.getRow() == 6){
+			temp.add(new BoardCell(currentCellOccupied.getRow()-2, currentCellOccupied.getCol()));
+		}
+		if (currentCellOccupied.getRow() != 0){
+			temp.add(new BoardCell(currentCellOccupied.getRow()-1, currentCellOccupied.getCol()));
+		}
+	}
+	
+	
+}

@@ -2,7 +2,9 @@ package chess;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
 import java.util.*;
 
 public class ChessGame {
@@ -12,6 +14,8 @@ public class ChessGame {
 	
 	public static int ct;
 	public static boolean check;
+	
+	public Board getBoard() { return model; }
 	
 	public ChessGame(){
 		ct = 1;
@@ -45,8 +49,30 @@ public class ChessGame {
 		else return false;
 	}
 	
+	public static boolean isCurrentPlayersPiece(Piece t){
+		if (getThisTurnsPlayer() == 1){
+			if (isWhitePiece(t)) return true;
+		}
+		if (getThisTurnsPlayer() == 2){
+			if (isBlackPiece(t)) return true;
+		}
+		return false;
+	}
+	
+	public static ArrayList<BoardCell> getMoves(Piece t){
+		ArrayList<BoardCell> moves = new ArrayList<BoardCell>();
+		
+		if (t instanceof WhitePawn){
+			//JOptionPane.showMessageDialog(view, t.getClass()+" "+t.getCurrentCellOccupied().toString());
+			moves.addAll(Board.ChessPiece.possibleMoves(t.getCurrentCellOccupied()));
+			System.out.println(""+moves.size());
+			return moves;
+		}
+		return null;
+	}
+	
 	public static boolean gameOver(){
-		ArrayList<Move> moves = Board.ChessPiece.possibleMoves();
+		/*ArrayList<Move> moves = Board.ChessPiece.possibleMoves();
 		int numOfCurrentPlayersMoves = 0;
 		for (Move r : moves){
 			Piece p = r.getMovedPiece();
@@ -68,8 +94,8 @@ public class ChessGame {
 			}
 		}
 		if (numOfCurrentPlayersMoves == 0 && check) return true;
-		if (check) JOptionPane.showMessageDialog(view, "Check.");
-		return false;
+		if (check) JOptionPane.showMessageDialog(view, "Check.");*/
+		return true;
 	}
 	
 	public static void startGameLoop(){
@@ -77,12 +103,12 @@ public class ChessGame {
 		while (keepPlaying){
 			System.out.println("Current Player's Turn -> "+getThisTurnsPlayer());
 			if (gameOver()){
-				keepPlaying = false;
+				keepPlaying = false;			
 			}
 			else{
-				//waitForValInput();
 				ct++;
-				//flipMat()
+				continue;
+				//flipMat();
 			}
 		}
 	}
@@ -93,7 +119,12 @@ public class ChessGame {
                 ChessGame cg = new ChessGame();
             	view.createAndShowUI();
                 view.loadDataToBoardUI(model);
-                startGameLoop();
+                try {
+					startGameLoop();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 	}

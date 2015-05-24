@@ -68,8 +68,41 @@ public class Board {
 		
 		private ChessPiece(String s){ this.str=s; }
 		
-		public static ArrayList<Move> possibleMoves(){
+		private static ChessPiece getEnum(String str){
+			for (ChessPiece t: ChessPiece.values()){
+				if (str.equals(t.getStr())) return t;
+			}
 			return null;
+		}
+		
+		public static ArrayList<BoardCell> possibleMoves(BoardCell x){
+			ArrayList<BoardCell> temp = new ArrayList<BoardCell>();
+			int row = x.getRow();
+			int col = x.getCol();
+			String piece_str = board[row][col];
+			ChessPiece piece = getEnum(piece_str);
+			if (ChessGame.getThisTurnsPlayer() == 1){
+				//white's moves
+				if (piece == ChessPiece.WHITE_PAWN){
+					if (row-1 >= 0){
+						if (ChessPiece.getEnum(board[row-1][col]) == ChessPiece.EMPTY){
+							BoardCell move = new BoardCell(row-1, col);
+							temp.add(move);
+						}
+						
+						if (row==6 && ChessPiece.getEnum(board[row-1][col]) == ChessPiece.EMPTY &&
+								ChessPiece.getEnum(board[row-2][col]) == ChessPiece.EMPTY){
+							BoardCell move = new BoardCell(row-2, col);
+							temp.add(move);
+
+						}
+					}
+				}
+			}
+			else {
+				//black's moves
+			}
+			return temp;
 		}
 	}
 }

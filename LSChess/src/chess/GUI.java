@@ -18,17 +18,13 @@ public class GUI extends JLayeredPane {
     private JPanel backingPanel = new JPanel(gridlayout);
     private static JPanel[][] panelGrid = new JPanel[GRID_ROWS][GRID_COLS];
     
-    private static Piece selectedPiece;
-    
     private static boolean isBlacksTurn;
     private static boolean isWhitesTurn;
-    
+        
     boolean selected = false;
     
-    
-    
     public GUI() {
-        backingPanel.setSize(LAYERED_PANE_SIZE);
+    	backingPanel.setSize(LAYERED_PANE_SIZE);
         backingPanel.setLocation(2 * GAP, 2 * GAP);
         backingPanel.setBackground(Color.gray);
         
@@ -56,8 +52,6 @@ public class GUI extends JLayeredPane {
         addMouseListener(myMouseAdapter);
         addMouseMotionListener(myMouseAdapter);
     }
-
-    public Piece getSelectedPiece() { return selectedPiece; } 
     
     private class MyMouseAdapter extends MouseAdapter {
         private JLabel dragLabel = null;
@@ -83,16 +77,25 @@ public class GUI extends JLayeredPane {
         	//and display it's possible moves if it's a piece owned by the player with the current turn
             if (!selected){
             	selected = true;
-            	if (components[0] instanceof WhitePawn){
-            		WhitePawn thisPawn = new WhitePawn();
-            		thisPawn.setCurrentCellOccupied(clickedCell);//input established
-            		selectedPiece = thisPawn;
-            		
-            		//System.out.println(thisPawn.getClass()+" @ "+clickedCell.getRow()+" "+clickedCell.getCol());
+            	Piece thisPiece = null;
+            	if (components[0] instanceof WhitePawn) thisPiece = new WhitePawn();
+            	if (components[0] instanceof WhiteCastle) thisPiece = new WhiteCastle();
+            	if (components[0] instanceof WhiteBishop) thisPiece = new WhiteBishop();
+            	if (components[0] instanceof WhiteHorse) thisPiece = new WhiteHorse();
+            	if (components[0] instanceof WhiteQueen) thisPiece = new WhiteQueen();
+            	if (components[0] instanceof WhiteKing) thisPiece = new WhiteKing();
+            	
+            	thisPiece.setCurrentCellOccupied(clickedCell);//input established//System.out.println(thisPawn.getClass()+" @ "+clickedCell.getRow()+" "+clickedCell.getCol());
+            	
+            	if (thisPiece != null && ChessGame.isCurrentPlayersPiece(thisPiece)) {
+            		ArrayList<BoardCell> pmoves = ChessGame.getMoves(thisPiece);
+            		if (pmoves != null){
+            			for (BoardCell bc : pmoves){
+            				panelGrid[bc.getRow()][bc.getCol()].add(new PossibleMove());
+            			}
+            		}
             	}
             }
-            
-            
             
         	//if a piece has already been selected and this boardcell is a possible move for that piece, move
         	//the piece to this clicked boardcell

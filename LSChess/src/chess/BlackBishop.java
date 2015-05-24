@@ -7,14 +7,21 @@ import java.util.ArrayList;
 
 public class BlackBishop extends JLabel implements Piece{
 	private static ImageIcon img = new ImageIcon("Images\\black-bishop.png");
+	private static BoardCell currentCellOccupied;
 	
 	public BlackBishop(){
 		super(img);
 	}
 
 	@Override
-	public ArrayList<Move> possibleMoves() {
+	public void setCurrentCellOccupied(BoardCell x) {
 		// TODO Auto-generated method stub
-		return null;
+		this.currentCellOccupied = x;
+	}
+
+	@Override
+	public BoardCell getCurrentCellOccupied() {
+		// TODO Auto-generated method stub
+		return currentCellOccupied;
 	}
 }
