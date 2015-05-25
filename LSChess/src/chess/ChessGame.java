@@ -65,7 +65,6 @@ public class ChessGame {
 		if (t instanceof WhitePawn){
 			//JOptionPane.showMessageDialog(view, t.getClass()+" "+t.getCurrentCellOccupied().toString());
 			moves.addAll(Board.ChessPiece.possibleMoves(t.getCurrentCellOccupied()));
-			System.out.println(""+moves.size());
 			return moves;
 		}
 		return null;

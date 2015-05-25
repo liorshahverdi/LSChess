@@ -22,12 +22,15 @@ public class GUI extends JLayeredPane {
     private static boolean isWhitesTurn;
         
     boolean selected = false;
+    private static Piece selectedPiece;
+    
+    public static Piece getSelectedPiece() { return selectedPiece; }
     
     public GUI() {
     	backingPanel.setSize(LAYERED_PANE_SIZE);
         backingPanel.setLocation(2 * GAP, 2 * GAP);
         backingPanel.setBackground(Color.gray);
-        
+        selectedPiece = null;
         int k=0;
         for (int row = 0; row < GRID_ROWS; row++) {
             for (int col = 0; col < GRID_COLS; col++) {
@@ -85,7 +88,9 @@ public class GUI extends JLayeredPane {
             	if (components[0] instanceof WhiteQueen) thisPiece = new WhiteQueen();
             	if (components[0] instanceof WhiteKing) thisPiece = new WhiteKing();
             	
-            	thisPiece.setCurrentCellOccupied(clickedCell);//input established//System.out.println(thisPawn.getClass()+" @ "+clickedCell.getRow()+" "+clickedCell.getCol());
+            	selectedPiece = thisPiece;
+            	thisPiece.setCurrentCellOccupied(clickedCell);//input established//System.out.println(thisPawn.getClass()
+            													//+" @ "+clickedCell.getRow()+" "+clickedCell.getCol());
             	
             	if (thisPiece != null && ChessGame.isCurrentPlayersPiece(thisPiece)) {
             		ArrayList<BoardCell> pmoves = ChessGame.getMoves(thisPiece);
@@ -96,9 +101,24 @@ public class GUI extends JLayeredPane {
             		}
             	}
             }
-            
         	//if a piece has already been selected and this boardcell is a possible move for that piece, move
         	//the piece to this clicked boardcell
+            else{
+            	selected = false;
+            	if (components[0] instanceof PossibleMove) {
+            		//System.out.println(getSelectedPiece().getCurrentCellOccupied().toString()+ " "+getSelectedPiece().getClass());
+            		Component t = (Component) getSelectedPiece();
+            		clearPossibleMovesFromUI();
+            		clickedPanel.add(t);
+            		
+            		BoardCell toClear = getSelectedPiece().getCurrentCellOccupied();
+            		panelGrid[toClear.getRow()][toClear.getCol()].remove(0);
+            		selectedPiece = null;
+            	}
+            	else{
+            		clearPossibleMovesFromUI();
+            	}
+            }
         }
 
         @Override
@@ -229,6 +249,22 @@ public class GUI extends JLayeredPane {
     		}
     	}
     	
+    }
+    
+    public static void clearPossibleMovesFromUI(){
+    	for (int r=0; r<8; r++){
+			for (int c=0; c<8; c++){
+				if (panelGrid[r][c].getComponents().length > 0){
+					Component[] thisPanelsComponents = panelGrid[r][c].getComponents();
+					for (Component x : thisPanelsComponents){
+						if (x instanceof PossibleMove){
+							PossibleMove x1 = (PossibleMove) x;
+							x1.setVisible(false);
+						}
+					}
+				}
+			}
+		}
     }
 
     public static void createAndShowUI() {

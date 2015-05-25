@@ -75,6 +75,10 @@ public class Board {
 			return null;
 		}
 		
+		public static ArrayList<Move> possibleMoves(){
+			return new ArrayList<Move>();
+		}
+		
 		public static ArrayList<BoardCell> possibleMoves(BoardCell x){
 			ArrayList<BoardCell> temp = new ArrayList<BoardCell>();
 			int row = x.getRow();
