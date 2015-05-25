@@ -1,7 +1,0 @@
-import java.util.ArrayList;
-package chess;
-
-public abstract class ChessPiece {
-	public abstract ArrayList<Move> possibleMoves();
-	
-}

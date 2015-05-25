@@ -89,24 +89,17 @@ public class Board {
 				//white's moves
 				if (piece == ChessPiece.WHITE_PAWN){
 					if (row-1 >= 0){
-						//move up 1
 						if (ChessPiece.getEnum(board[row-1][col]) == ChessPiece.EMPTY){
 							BoardCell move = new BoardCell(row-1, col);
 							temp.add(move);
 						}
 						
-						//move up 2
-						if (row==6 && ChessPiece.getEnum(board[row-2][col]) == ChessPiece.EMPTY &&
+						if (row==6 && ChessPiece.getEnum(board[row-1][col]) == ChessPiece.EMPTY &&
 								ChessPiece.getEnum(board[row-2][col]) == ChessPiece.EMPTY){
 							BoardCell move = new BoardCell(row-2, col);
 							temp.add(move);
 
 						}
-						
-						/*if (ChessPiece.getEnum(board[row-1][col]) == ChessPiece.EMPTY){
-							BoardCell move = new BoardCell(row-1, col);
-							temp.add(move);
-						}*/
 					}
 				}
 			}

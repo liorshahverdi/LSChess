@@ -96,17 +96,14 @@ public class Board {
 						}
 						
 						//move up 2
-						if (row==6 && ChessPiece.getEnum(board[row-2][col]) == ChessPiece.EMPTY &&
+						if (row==6 && ChessPiece.getEnum(board[row-1][col]) == ChessPiece.EMPTY &&
 								ChessPiece.getEnum(board[row-2][col]) == ChessPiece.EMPTY){
 							BoardCell move = new BoardCell(row-2, col);
 							temp.add(move);
 
 						}
 						
-						/*if (ChessPiece.getEnum(board[row-1][col]) == ChessPiece.EMPTY){
-							BoardCell move = new BoardCell(row-1, col);
-							temp.add(move);
-						}*/
+						
 					}
 				}
 			}

@@ -3,5 +3,6 @@
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.awt.EventQueue"/>
 <fullyQualifiedTypeName name="java.util.Properties"/>
+<fullyQualifiedTypeName name="chess.Board"/>
 <fullyQualifiedTypeName name="chess.Board.ChessPiece"/>
 </qualifiedTypeNameHistroy>

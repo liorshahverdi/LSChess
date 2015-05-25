@@ -13,7 +13,7 @@ public class Move {
 		this.isKill = false;
 	}
 	
-	public Move(BoardCell f, BoardCell t, Piece p, boolean bt){
+	public Move(BoardCell f, BoardCell t, Piece p, boolean t){
 		this.fromCell = f;
 		this.toCell = t;
 		this.movedPiece = p;
