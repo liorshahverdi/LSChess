@@ -1,0 +1,16 @@
+package chess;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class PossibleMove extends JLabel{
+	private static ImageIcon img = new ImageIcon("Images\\possible-move.png");
+	private boolean isKill = false;
+	
+	private void setIsKill(boolean x){ this.isKill = x; }
+	private boolean getIsKill() { return isKill; }
+	
+	public PossibleMove(){
+		super(img);
+	}
+}

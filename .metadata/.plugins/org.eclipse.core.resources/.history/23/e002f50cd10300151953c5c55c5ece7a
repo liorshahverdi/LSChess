@@ -5,8 +5,8 @@ public class BoardCell {
 	private int col;
 	private boolean isKill = false;
 	
-	public void setIsKill(boolean x){ this.isKill = x; }
-	public boolean getIsKill() { return isKill; }
+	private void setIsKill(boolean x){ this.isKill = x; }
+	private boolean getIsKill() { return isKill; }
 
 	public BoardCell(int r, int c) {
 		row = r;
