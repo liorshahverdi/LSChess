@@ -191,7 +191,7 @@ public class Board {
 							collision_tr = true;
 						}
 						else{
-							BoardCell move = new BoardCell(row-dt, col+dt);
+							BoardCell move = new BoardCell(r-dt, c+dt);
 							temp.add(move);
 							dt++;
 						}
@@ -249,82 +249,6 @@ public class Board {
 								temp.add(move);
 
 							}
-						}
-					}
-				}
-				if (piece == ChessPiece.BLACK_BISHOP)
-				{
-					int dt = 1;
-					boolean collision_tl = false;
-					while (!collision_tl){
-						if (col - dt <= -1 || row - dt <= -1) break;
-						if (ChessPiece.getEnum(board[row-dt][col-dt]) != ChessPiece.EMPTY){
-							if (isWhite(ChessPiece.getEnum(board[row-dt][col-dt]))){
-								BoardCell move = new BoardCell(row-dt, col-dt);
-								move.setIsKill(true);
-								temp.add(move);
-							}
-							collision_tl = true;
-						}
-						else{
-							BoardCell move = new BoardCell(row-dt, col-dt);
-							temp.add(move);
-						}
-					}
-					dt = 1;
-					boolean collision_bl = false;
-					while (!collision_bl){
-						if (col-dt <= -1 || row+dt>=8) break;
-						if ((ChessPiece.getEnum(board[row+dt][col-dt])) != ChessPiece.EMPTY){
-							if (isWhite(ChessPiece.getEnum(board[row+dt][col-dt]))){
-								BoardCell move = new BoardCell(row+dt, col-dt);
-								move.setIsKill(true);
-								temp.add(move);
-							}
-							collision_bl = true;
-						}
-						else{
-							BoardCell move = new BoardCell(row+dt, col-dt);
-							temp.add(move);
-							dt++;
-						}
-					}
-					dt = 1;
-					boolean collision_tr = false;
-					while (!collision_tr){
-						if (col+dt >=8 || row-dt <= 1) break;
-						if (ChessPiece.getEnum(board[row-dt][col+dt]) != ChessPiece.EMPTY){
-							//check for kill option
-							if (isWhite(ChessPiece.getEnum(board[row-dt][col+dt]))){
-								BoardCell move = new BoardCell(row-dt, col+dt);
-								move.setIsKill(true);
-								temp.add(move);
-							}
-							collision_tr = true;
-						}
-						else{
-							BoardCell move = new BoardCell(row-dt, col+dt);
-							temp.add(move);
-							dt++;
-						}
-					}
-					dt = 1;
-					boolean collision_br = false;
-					while (!collision_br){
-						if ((col+dt == 8) ||(row+dt == 8)) break;
-						if (ChessPiece.getEnum(board[row+dt][col+dt]) != ChessPiece.EMPTY){
-							//check for kill option
-							if (isWhite(ChessPiece.getEnum(board[row+dt][col+dt]))){
-								BoardCell move = new BoardCell(row+dt, col+dt);
-								move.setIsKill(true);
-								temp.add(move);
-							}
-							collision_br = true;
-						}
-						else{
-							BoardCell move = new BoardCell(row+dt, col+dt);
-							temp.add(move);
-							dt++;
 						}
 					}
 				}

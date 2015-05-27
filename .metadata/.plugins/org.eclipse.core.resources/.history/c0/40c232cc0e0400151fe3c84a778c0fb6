@@ -191,7 +191,7 @@ public class Board {
 							collision_tr = true;
 						}
 						else{
-							BoardCell move = new BoardCell(row-dt, col+dt);
+							BoardCell move = new BoardCell(r-dt, c+dt);
 							temp.add(move);
 							dt++;
 						}
@@ -303,7 +303,7 @@ public class Board {
 							collision_tr = true;
 						}
 						else{
-							BoardCell move = new BoardCell(row-dt, col+dt);
+							BoardCell move = new BoardCell(r-dt, c+dt);
 							temp.add(move);
 							dt++;
 						}
