@@ -216,21 +216,7 @@ public class Board {
 						}
 					}
 				}
-				if (piece == ChessPiece.WHITE_CASTLE)
-				{
-					int dt = 1;
-					if (col >= 0 && col <= 7){
-						boolean collision_left = false;
-						while (!collision_left){
-							if (col-dt == -1) break;
-							if (ChessPiece.getEnum(board[row][col-dt]) != ChessPiece.EMPTY){
-								if (isBlack(ChessPiece.getEnum(board[row][col-dt]))){
-									BoardCell move = new BoardCell(row, col-dt);
-								}
-								collision_left = true;
-							}
-						}
-					}
+				if (piece == ChessPiece.WHITE_CASTLE){
 					
 				}
 			}
