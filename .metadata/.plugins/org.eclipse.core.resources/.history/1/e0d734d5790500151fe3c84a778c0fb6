@@ -1258,7 +1258,7 @@ public class Board {
 							BoardCell move = new BoardCell(row-1,col-1);
 							temp.add(move);
 						}
-						else if (pm != ChessPiece.EMPTY && isWhite(pm) && pm != ChessPiece.WHITE_KING){
+						else if (pm != ChessPiece.EMPTY && isBlack(pm) && pm != ChessPiece.BLACK_KING){
 							BoardCell move = new BoardCell(row-1,col-1);
 							move.setIsKill(true);
 							temp.add(move);
