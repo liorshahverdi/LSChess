@@ -391,11 +391,6 @@ public class Board {
 								temp.add(move);
 							}
 						}
-						else
-						{
-							BoardCell move = new BoardCell(row-1,col+2);
-							temp.add(move);
-						}
 					}
 				}
 			}

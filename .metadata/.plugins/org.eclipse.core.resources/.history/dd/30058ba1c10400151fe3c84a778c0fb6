@@ -371,30 +371,7 @@ public class Board {
 						if (pm != ChessPiece.EMPTY){
 							if (isBlack(pm)){
 								BoardCell move = new BoardCell(row-2, col+1);
-								move.setIsKill(true);
-								temp.add(move);
 							}
-						}
-						else
-						{
-							BoardCell move = new BoardCell(row-2, col+1);
-							temp.add(move);
-						}
-					}
-					
-					if (row-1 >= 0 && col+2 <= 7){
-						ChessPiece pm = ChessPiece.getEnum(board[row-1][col+2]);
-						if (pm != ChessPiece.EMPTY){
-							if (isBlack(pm)){
-								BoardCell move = new BoardCell(row-1, col+2);
-								move.setIsKill(true);
-								temp.add(move);
-							}
-						}
-						else
-						{
-							BoardCell move = new BoardCell(row-1,col+2);
-							temp.add(move);
 						}
 					}
 				}

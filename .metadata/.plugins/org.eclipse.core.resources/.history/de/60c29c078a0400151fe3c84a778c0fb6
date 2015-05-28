@@ -135,6 +135,7 @@ public class Board {
 									ChessPiece.getEnum(board[row-1][col]) == ChessPiece.EMPTY){
 								BoardCell move = new BoardCell(row-2, col);//move up 2 from initial starting cell
 								temp.add(move);
+
 							}
 						}
 					}
@@ -298,105 +299,8 @@ public class Board {
 								}
 							}
 						}
-					}	
-				}
-				if (piece == ChessPiece.WHITE_KNIGHT)
-				{
-					if (row-2 >= 0 && col-1 >= 0){
-						ChessPiece pm = ChessPiece.getEnum(board[row-2][col-1]);
-						if (pm != ChessPiece.EMPTY){
-							if (isBlack(pm)){
-								BoardCell move = new BoardCell(row-2, col-1);
-								move.setIsKill(true);
-								temp.add(move);
-							}
-						}
-						else
-						{
-							BoardCell move = new BoardCell(row-2, col-1);
-							temp.add(move);
-						}
 					}
 					
-					if (row-1 >= 0 && col-2 >= 0){
-						ChessPiece pm = ChessPiece.getEnum(board[row-1][col-2]);
-						if (pm != ChessPiece.EMPTY){
-							if (isBlack(pm)){
-								BoardCell move = new BoardCell(row-1, col-2);
-								move.setIsKill(true);
-								temp.add(move);
-							}
-						}
-						else
-						{
-							BoardCell move = new BoardCell(row-1, col-2);
-							temp.add(move);
-						}
-					}
-					
-					if (row+1 <= 7 && col-2 >= 0){
-						ChessPiece pm = ChessPiece.getEnum(board[row+1][col-2]);
-						if (pm != ChessPiece.EMPTY){
-							if (isBlack(pm)){
-								BoardCell move = new BoardCell(row+1, col-2);
-								move.setIsKill(true);
-								temp.add(move);
-							}
-						}
-						else{
-							BoardCell move = new BoardCell(row+1, col-2);
-							temp.add(move);
-						}
-					}
-					
-					if (row+2 <= 7 && col-1 >= 0) {
-						ChessPiece pm = ChessPiece.getEnum(board[row+2][col-1]);
-						if (pm != ChessPiece.EMPTY){
-							if (isBlack(pm)){
-								BoardCell move = new BoardCell(row+2, col-1);
-								move.setIsKill(true);
-								temp.add(move);
-							}
-						}
-						else
-						{
-							BoardCell move = new BoardCell(row+2, col-1);
-							temp.add(move);
-						}
-					}
-					
-					if (row-2 >= 0 && col+1 <= 7)
-					{
-						ChessPiece pm = ChessPiece.getEnum(board[row-2][col+1]);
-						if (pm != ChessPiece.EMPTY){
-							if (isBlack(pm)){
-								BoardCell move = new BoardCell(row-2, col+1);
-								move.setIsKill(true);
-								temp.add(move);
-							}
-						}
-						else
-						{
-							BoardCell move = new BoardCell(row-2, col+1);
-							temp.add(move);
-						}
-					}
-					
-					if (row-1 >= 0 && col+2 <= 7){
-						ChessPiece pm = ChessPiece.getEnum(board[row-1][col+2]);
-						if (pm != ChessPiece.EMPTY){
-							if (isBlack(pm)){
-								BoardCell move = new BoardCell(row-1, col+2);
-								move.setIsKill(true);
-								temp.add(move);
-							}
-						}
-						else
-						{
-							BoardCell move = new BoardCell(row-1,col+2);
-							temp.add(move);
-						}
-					}
 				}
 			}
 			else {
