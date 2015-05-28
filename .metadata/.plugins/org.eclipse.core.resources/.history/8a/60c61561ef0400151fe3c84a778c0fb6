@@ -747,7 +747,7 @@ public class Board {
 					{
 						ChessPiece pm = ChessPiece.getEnum(board[row+2][col+1]);
 						if (pm != ChessPiece.EMPTY){
-							if (isWhite(pm)){
+							if (isBlack(pm)){
 								BoardCell move = new BoardCell(row+2, col+1);
 								move.setIsKill(true);
 								temp.add(move);
