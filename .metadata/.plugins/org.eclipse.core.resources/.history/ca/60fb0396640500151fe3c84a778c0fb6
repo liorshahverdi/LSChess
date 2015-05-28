@@ -978,7 +978,7 @@ public class Board {
 						if (col+dt >= 8 || row+dt >= 8) break;
 						ChessPiece pm = ChessPiece.getEnum(board[row+dt][col+dt]);
 						if (pm != ChessPiece.EMPTY){
-							if (isWhite(pm)){
+							if (isBlack(pm)){
 								BoardCell move = new BoardCell(row+dt, col+dt);
 								move.setIsKill(true);
 								temp.add(move);
@@ -996,7 +996,7 @@ public class Board {
 						if (row+dt >= 8) break;
 						ChessPiece pm = ChessPiece.getEnum(board[row+dt][col]);
 						if (pm != ChessPiece.EMPTY){
-							if (isWhite(pm)){
+							if (isBlack(pm)){
 								BoardCell move = new BoardCell(row+dt, col);
 								move.setIsKill(true);
 								temp.add(move);
@@ -1015,7 +1015,7 @@ public class Board {
 						if(row+dt >= 8) break;
 						ChessPiece pm = ChessPiece.getEnum(board[row+dt][col-dt]);
 						if (pm != ChessPiece.EMPTY){
-							if (isWhite(pm)){
+							if (isBlack(pm)){
 								BoardCell move = new BoardCell(row+dt, col-dt);
 								move.setIsKill(true);
 								temp.add(move);
@@ -1034,7 +1034,7 @@ public class Board {
 						if (col-dt <= 1) break;
 						ChessPiece pm = ChessPiece.getEnum(board[row][col-dt]);
 						if (pm != ChessPiece.EMPTY){
-							if (isWhite(pm)){
+							if (isBlack(pm)){
 								BoardCell move = new BoardCell(row,col-dt);
 								move.setIsKill(true);
 								temp.add(move);
@@ -1053,7 +1053,7 @@ public class Board {
 						if (col-dt <= -1 || row-dt <= -1) break;
 						ChessPiece pm = ChessPiece.getEnum(board[row-dt][col-dt]);
 						if (pm != ChessPiece.EMPTY){
-							if (isWhite(pm)){
+							if (isBlack(pm)){
 								BoardCell move = new BoardCell(row-dt, col-dt);
 								move.setIsKill(true);
 								temp.add(move);
