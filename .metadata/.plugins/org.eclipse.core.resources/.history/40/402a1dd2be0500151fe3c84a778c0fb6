@@ -9,7 +9,7 @@ public class Board {
 				{"b_c","b_h","b_b","b_q","b_k","b_b","b_h","b_c"},
 				{"b_p","b_p","b_p","b_p","b_p","b_p","b_p","b_p"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
-				{"-",  "-"  ,"-"  ,"-"  ,"w_c"  ,"-"  ,"-"  ,"-"},
+				{"-",  "-"  ,"-"  ,"-"  ,"w_q"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"w_p","w_p","w_p","w_p","w_p","w_p","w_p","w_p"},
@@ -1314,7 +1314,10 @@ public class Board {
 				if (piece == ChessPiece.WHITE_BISHOP) temp.addAll(whiteBishopPossibleMoves(row,col));
 				if (piece == ChessPiece.WHITE_CASTLE) temp.addAll(whiteCastlePossibleMoves(row,col));
 				if (piece == ChessPiece.WHITE_KNIGHT) temp.addAll(whiteKnightPossibleMoves(row,col));
-				if (piece == ChessPiece.WHITE_QUEEN) temp.addAll(whiteQueenPossibleMoves(row,col));
+				if (piece == ChessPiece.WHITE_QUEEN) {
+					
+					temp.addAll(whiteQueenPossibleMoves(row,col));
+				}
 				if (piece == ChessPiece.WHITE_KING) temp.addAll(whiteKingPossibleMoves(row,col));
 			}
 			else {

@@ -9,7 +9,7 @@ public class Board {
 				{"b_c","b_h","b_b","b_q","b_k","b_b","b_h","b_c"},
 				{"b_p","b_p","b_p","b_p","b_p","b_p","b_p","b_p"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
-				{"-",  "-"  ,"-"  ,"-"  ,"w_c"  ,"-"  ,"-"  ,"-"},
+				{"-",  "-"  ,"-"  ,"-"  ,"w_q"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"w_p","w_p","w_p","w_p","w_p","w_p","w_p","w_p"},
@@ -489,7 +489,6 @@ public class Board {
 						move.setIsKill(true);
 						p.add(move);
 					}
-					collision_right = true;
 				}
 				else {
 					BoardCell move = new BoardCell(row, col+dt);
@@ -508,7 +507,6 @@ public class Board {
 						move.setIsKill(true);
 						p.add(move);
 					}
-					collision_br = true;
 				}
 				else{
 					BoardCell move = new BoardCell(row+dt, col+dt);
@@ -557,7 +555,7 @@ public class Board {
 			dt = 1;
 			boolean collision_left = false;
 			while(!collision_left){
-				if (col-dt <= -1) break;
+				if (col-dt <= 1) break;
 				ChessPiece pm = ChessPiece.getEnum(board[row][col-dt]);
 				if (pm != ChessPiece.EMPTY){
 					if (isBlack(pm)){
@@ -572,7 +570,7 @@ public class Board {
 					p.add(move);
 					dt++;
 				}
-			}			
+			}
 			dt=1;
 			boolean collision_tl = false;
 			while(!collision_tl){
