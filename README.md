@@ -1,1 +1,2 @@
-developed in eclipse, uses Java Swing or JavaFX (haven't decided yet).
+2 Player local Java Chess Application!
+has a graphical user interface. classes are separated to fit model view controller standards. Enjoy! 
