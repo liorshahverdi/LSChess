@@ -2,6 +2,8 @@ package chess;
 
 import javax.swing.*;
 
+import chess.Board.ChessPiece;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -14,5 +16,10 @@ public class WhitePawn extends JLabel implements Piece{
 	
 	public WhitePawn(){
 		super(img);
+	}
+	@Override
+	public ChessPiece getEnumVal() {
+		// TODO Auto-generated method stub
+		return ChessPiece.WHITE_PAWN;
 	}
 }

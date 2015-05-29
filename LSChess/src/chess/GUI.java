@@ -107,12 +107,21 @@ public class GUI extends JLayeredPane {
             	selected = false;
             	if (components[0] instanceof PossibleMove) {
             		//System.out.println(getSelectedPiece().getCurrentCellOccupied().toString()+ " "+getSelectedPiece().getClass());
-            		Component t = (Component) getSelectedPiece();
+            		Piece t = getSelectedPiece();
             		clearPossibleMovesFromUI();
-            		clickedPanel.add(t);
+            		JLabel t1 = (JLabel) t;
+            		clickedPanel.add(t1);
             		
+            		//update the board(model)
+            		Move nextMove = new Move(t.getCurrentCellOccupied(), clickedCell, t);
+            		ChessGame.update(nextMove);
+            		
+            		//clear old cell in our view
             		BoardCell toClear = getSelectedPiece().getCurrentCellOccupied();
+            		t.setCurrentCellOccupied(clickedCell);
+
             		panelGrid[toClear.getRow()][toClear.getCol()].remove(0);
+            		
             		selectedPiece = null;
             	}
             	else{

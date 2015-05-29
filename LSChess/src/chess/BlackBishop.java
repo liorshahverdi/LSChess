@@ -2,6 +2,8 @@ package chess;
 
 import javax.swing.*;
 
+import chess.Board.ChessPiece;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -23,5 +25,11 @@ public class BlackBishop extends JLabel implements Piece{
 	public BoardCell getCurrentCellOccupied() {
 		// TODO Auto-generated method stub
 		return currentCellOccupied;
+	}
+
+	@Override
+	public ChessPiece getEnumVal() {
+		// TODO Auto-generated method stub
+		return ChessPiece.BLACK_BISHOP;
 	}
 }

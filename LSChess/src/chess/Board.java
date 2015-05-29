@@ -9,7 +9,7 @@ public class Board {
 				{"b_c","b_h","b_b","b_q","b_k","b_b","b_h","b_c"},
 				{"b_p","b_p","b_p","b_p","b_p","b_p","b_p","b_p"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
-				{"-",  "-"  ,"-"  ,"-"  ,"w_c"  ,"-"  ,"-"  ,"-"},
+				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"w_p","w_p","w_p","w_p","w_p","w_p","w_p","w_p"},
@@ -17,7 +17,8 @@ public class Board {
 	}
 	
 	public String[][] getBoard() { return board; }
-	public void setBoard(String[][] b) { board = b; }
+	public void setBoard(String[][] b) { board = b; }	
+	public void setLocation(BoardCell x, String v){ board[x.getRow()][x.getCol()] = v; }
 	
 	public static void printForP1()
 	{
@@ -64,7 +65,7 @@ public class Board {
 		EMPTY("-");
 		
 		private String str;
-		private String getStr(){ return str; }
+		public String getStr(){ return str; }
 		
 		private ChessPiece(String s){ this.str=s; }
 		
@@ -1299,7 +1300,16 @@ public class Board {
 		}
 		
 		public static ArrayList<Move> possibleMoves(){
-			return new ArrayList<Move>();
+			ArrayList<Move> p = new ArrayList<Move>();
+			
+			for (String[] x : board){
+				for (String y : x){
+					ChessPiece piece = ChessPiece.getEnum(y);
+					
+				}
+			}
+			
+			return p;
 		}
 		
 		public static ArrayList<BoardCell> possibleMoves(BoardCell x){
