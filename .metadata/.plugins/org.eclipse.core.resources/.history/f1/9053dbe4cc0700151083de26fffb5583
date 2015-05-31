@@ -10,7 +10,7 @@ public class Board {
 				{"b_p","b_p","b_p","b_p","b_p","b_p","b_p","b_p"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
-				{"-",  "-"  ,"-"  ,"b_q"  ,"-"  ,"-"  ,"-"  ,"-"},
+				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"w_p","w_p","w_p","w_p","w_p","w_p","w_p","w_p"},
 				{"w_c","w_h","w_b","w_q","w_k","w_b","w_h","w_c"} };
@@ -770,8 +770,8 @@ public class Board {
 				else{
 					BoardCell move = new BoardCell(row-dt, col-dt);
 					p.add(move);
-					dt++;
 				}
+				System.out.println("roger");
 			}
 			dt = 1;
 			boolean collision_bl = false;
@@ -1109,7 +1109,6 @@ public class Board {
 						move.setIsKill(true);
 						p.add(move);
 					}
-					collision_right = true;
 				}
 				else {
 					BoardCell move = new BoardCell(row, col+dt);
@@ -1128,7 +1127,6 @@ public class Board {
 						move.setIsKill(true);
 						p.add(move);
 					}
-					collision_br = true;
 				}
 				else{
 					BoardCell move = new BoardCell(row+dt, col+dt);

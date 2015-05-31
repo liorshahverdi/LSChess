@@ -10,7 +10,7 @@ public class Board {
 				{"b_p","b_p","b_p","b_p","b_p","b_p","b_p","b_p"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
-				{"-",  "-"  ,"-"  ,"b_q"  ,"-"  ,"-"  ,"-"  ,"-"},
+				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"w_p","w_p","w_p","w_p","w_p","w_p","w_p","w_p"},
 				{"w_c","w_h","w_b","w_q","w_k","w_b","w_h","w_c"} };
@@ -19,23 +19,6 @@ public class Board {
 	public String[][] getBoard() { return board; }
 	public void setBoard(String[][] b) { board = b; }	
 	public void setLocation(BoardCell x, String v){ board[x.getRow()][x.getCol()] = v; }
-	
-	public static void flipMat(String[][] x)
-	{
-		String[][] newMat = new String[8][8];
-		int oj = 0;
-		int oi = 0;
-		for (int j=7; j>-1; j--){
-			for (int i=7; i>-1; i--){
-				if (oi == 8) oi = 0;
-				newMat[oj][oi] = board[j][i];
-				oi++;
-			}
-			if (oj == 8) oj = 0;
-			else oj++;
-		}
-		board = newMat;
-	}
 	
 	public static void printForP1()
 	{
@@ -770,7 +753,6 @@ public class Board {
 				else{
 					BoardCell move = new BoardCell(row-dt, col-dt);
 					p.add(move);
-					dt++;
 				}
 			}
 			dt = 1;
@@ -1109,7 +1091,6 @@ public class Board {
 						move.setIsKill(true);
 						p.add(move);
 					}
-					collision_right = true;
 				}
 				else {
 					BoardCell move = new BoardCell(row, col+dt);
@@ -1128,7 +1109,6 @@ public class Board {
 						move.setIsKill(true);
 						p.add(move);
 					}
-					collision_br = true;
 				}
 				else{
 					BoardCell move = new BoardCell(row+dt, col+dt);

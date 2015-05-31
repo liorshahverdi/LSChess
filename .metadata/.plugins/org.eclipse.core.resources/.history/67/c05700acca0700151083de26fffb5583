@@ -15,7 +15,7 @@ public class ChessGame {
 	public static int ct;
 	public static boolean check;
 	
-	public static Board getBoard() { return model; }
+	public Board getBoard() { return model; }
 	
 	public ChessGame(){
 		ct = 1;
@@ -81,12 +81,7 @@ public class ChessGame {
 	}
 	
 	public static void rotateToNextTurn(){
-		Board b = getBoard();
-		Board.flipMat(b.getBoard());
-		//model.printForP1();
-		view.clearUI();
-		view.loadDataToBoardUI(model);
-		ct++;
+		
 	}
 	
 	public static boolean gameOver(){

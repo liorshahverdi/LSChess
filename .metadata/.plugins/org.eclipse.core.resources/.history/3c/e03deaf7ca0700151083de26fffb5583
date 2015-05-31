@@ -83,10 +83,6 @@ public class ChessGame {
 	public static void rotateToNextTurn(){
 		Board b = getBoard();
 		Board.flipMat(b.getBoard());
-		//model.printForP1();
-		view.clearUI();
-		view.loadDataToBoardUI(model);
-		ct++;
 	}
 	
 	public static boolean gameOver(){

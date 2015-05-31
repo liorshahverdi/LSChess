@@ -86,7 +86,6 @@ public class ChessGame {
 		//model.printForP1();
 		view.clearUI();
 		view.loadDataToBoardUI(model);
-		ct++;
 	}
 	
 	public static boolean gameOver(){

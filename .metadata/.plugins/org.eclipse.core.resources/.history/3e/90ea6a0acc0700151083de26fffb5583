@@ -87,13 +87,6 @@ public class GUI extends JLayeredPane {
             	if (components[0] instanceof WhiteHorse) thisPiece = new WhiteHorse();
             	if (components[0] instanceof WhiteQueen) thisPiece = new WhiteQueen();
             	if (components[0] instanceof WhiteKing) thisPiece = new WhiteKing();
-            	if (components[0] instanceof BlackPawn) thisPiece = new BlackPawn();
-            	if (components[0] instanceof BlackCastle) thisPiece = new BlackCastle();
-            	if (components[0] instanceof BlackBishop) thisPiece = new BlackBishop();
-            	if (components[0] instanceof BlackHorse) thisPiece = new BlackHorse();
-            	if (components[0] instanceof BlackQueen) thisPiece = new BlackQueen();
-            	if (components[0] instanceof BlackKing) thisPiece = new BlackKing();
-
             	
             	selectedPiece = thisPiece;
             	thisPiece.setCurrentCellOccupied(clickedCell);//input established//System.out.println(thisPawn.getClass()
