@@ -119,10 +119,8 @@ public class GUI extends JLayeredPane {
             		//clear old cell in our view
             		BoardCell toClear = getSelectedPiece().getCurrentCellOccupied();
             		t.setCurrentCellOccupied(clickedCell);
+
             		panelGrid[toClear.getRow()][toClear.getCol()].remove(0);
-            		
-            		//rotate the board and increment turn
-            		
             		
             		selectedPiece = null;
             	}
@@ -201,8 +199,8 @@ public class GUI extends JLayeredPane {
                 } else {
                 	Component[] theseComponents = droppedPanel.getComponents();
                 	if (theseComponents.length != 0){
-                		//clickedPanel.add(dragLabel);
-                		//clickedPanel.revalidate();
+                		clickedPanel.add(dragLabel);
+                		clickedPanel.revalidate();
                 	} else{
                 		droppedPanel.add(dragLabel);
                         droppedPanel.revalidate();

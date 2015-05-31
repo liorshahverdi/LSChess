@@ -134,7 +134,7 @@ public class GUI extends JLayeredPane {
 
         @Override
         public void mousePressed(MouseEvent me) {
-            clickedPanel = (JPanel) backingPanel.getComponentAt(me.getPoint());
+            /*clickedPanel = (JPanel) backingPanel.getComponentAt(me.getPoint());
             Component[] components = clickedPanel.getComponents(); 
             if (components.length == 0) {
                 return;
@@ -156,7 +156,7 @@ public class GUI extends JLayeredPane {
                 dragLabel.setLocation(x, y);
                 add(dragLabel, JLayeredPane.DRAG_LAYER);
                 repaint();
-            }
+            }*/
         }
 
         @Override
@@ -201,8 +201,8 @@ public class GUI extends JLayeredPane {
                 } else {
                 	Component[] theseComponents = droppedPanel.getComponents();
                 	if (theseComponents.length != 0){
-                		//clickedPanel.add(dragLabel);
-                		//clickedPanel.revalidate();
+                		clickedPanel.add(dragLabel);
+                		clickedPanel.revalidate();
                 	} else{
                 		droppedPanel.add(dragLabel);
                         droppedPanel.revalidate();

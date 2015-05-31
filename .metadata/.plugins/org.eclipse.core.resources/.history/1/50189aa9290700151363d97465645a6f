@@ -201,8 +201,8 @@ public class GUI extends JLayeredPane {
                 } else {
                 	Component[] theseComponents = droppedPanel.getComponents();
                 	if (theseComponents.length != 0){
-                		//clickedPanel.add(dragLabel);
-                		//clickedPanel.revalidate();
+                		clickedPanel.add(dragLabel);
+                		clickedPanel.revalidate();
                 	} else{
                 		droppedPanel.add(dragLabel);
                         droppedPanel.revalidate();

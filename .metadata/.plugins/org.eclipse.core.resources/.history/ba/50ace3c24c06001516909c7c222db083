@@ -1299,7 +1299,6 @@ public class Board {
 			return p;
 		}
 		
-		//computes full moves for each piece on the board
 		public static ArrayList<Move> possibleMoves(){
 			ArrayList<Move> p = new ArrayList<Move>();
 			
