@@ -157,6 +157,7 @@ public class GUI extends JLayeredPane {
                 if (!(components[0] instanceof PossibleMove)){
                 	dragLabel.setLocation(x, y);
                     add(dragLabel, JLayeredPane.DRAG_LAYER);
+                    
                 }
                 repaint();
             }

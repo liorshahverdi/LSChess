@@ -153,11 +153,8 @@ public class GUI extends JLayeredPane {
 
                 int x = me.getPoint().x - dragLabelWidthDiv2;
                 int y = me.getPoint().y - dragLabelHeightDiv2;
-                
-                if (!(components[0] instanceof PossibleMove)){
-                	dragLabel.setLocation(x, y);
-                    add(dragLabel, JLayeredPane.DRAG_LAYER);
-                }
+                dragLabel.setLocation(x, y);
+                add(dragLabel, JLayeredPane.DRAG_LAYER);
                 repaint();
             }
         }
@@ -203,7 +200,10 @@ public class GUI extends JLayeredPane {
                     clickedPanel.revalidate();
                 } else {
                 	Component[] theseComponents = droppedPanel.getComponents();
-                	if (theseComponents.length == 0){
+                	if (theseComponents.length != 0){
+                		//clickedPanel.add(dragLabel);
+                		//clickedPanel.revalidate();
+                	} else{
                 		droppedPanel.add(dragLabel);
                         droppedPanel.revalidate();
                 	}

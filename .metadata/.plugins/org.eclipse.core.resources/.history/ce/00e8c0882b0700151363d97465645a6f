@@ -140,7 +140,7 @@ public class GUI extends JLayeredPane {
                 return;
             }
             // if we click on jpanel that holds a jlabel
-            if (components[0] instanceof JLabel) {
+            if (components[0] instanceof JLabel && !(components[0] instanceof PossibleMove)) {
 
                 // remove label from panel
                 dragLabel = (JLabel) components[0];
@@ -153,11 +153,8 @@ public class GUI extends JLayeredPane {
 
                 int x = me.getPoint().x - dragLabelWidthDiv2;
                 int y = me.getPoint().y - dragLabelHeightDiv2;
-                
-                if (!(components[0] instanceof PossibleMove)){
-                	dragLabel.setLocation(x, y);
-                    add(dragLabel, JLayeredPane.DRAG_LAYER);
-                }
+                dragLabel.setLocation(x, y);
+                add(dragLabel, JLayeredPane.DRAG_LAYER);
                 repaint();
             }
         }
