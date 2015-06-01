@@ -79,7 +79,6 @@ public class ChessGame {
 		//model.printForP1();
 	}
 	
-	//flips the matrix so the next player can play as 1st player and loads it to the view
 	public static void rotateToNextTurn(){
 		Board b = getBoard();
 		Board.flipMat(b.getBoard());
