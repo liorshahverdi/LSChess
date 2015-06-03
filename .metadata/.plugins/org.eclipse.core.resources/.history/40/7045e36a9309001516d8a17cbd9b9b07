@@ -95,6 +95,7 @@ public class GUI extends JLayeredPane {
                 	if (components[0] instanceof BlackQueen) thisPiece = new BlackQueen();
                 	if (components[0] instanceof BlackKing) thisPiece = new BlackKing();
 
+                	
                 	selectedPiece = thisPiece;
                 	thisPiece.setCurrentCellOccupied(clickedCell);//input established//System.out.println(thisPawn.getClass()
                 													//+" @ "+clickedCell.getRow()+" "+clickedCell.getCol());

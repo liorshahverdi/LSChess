@@ -81,63 +81,61 @@ public class GUI extends JLayeredPane {
             if (!selected){
             	selected = true;
             	Piece thisPiece = null;
-            	if (components != null && components.length > 0){
-            		if (components[0] instanceof WhitePawn) thisPiece = new WhitePawn();
-                	if (components[0] instanceof WhiteCastle) thisPiece = new WhiteCastle();
-                	if (components[0] instanceof WhiteBishop) thisPiece = new WhiteBishop();
-                	if (components[0] instanceof WhiteHorse) thisPiece = new WhiteHorse();
-                	if (components[0] instanceof WhiteQueen) thisPiece = new WhiteQueen();
-                	if (components[0] instanceof WhiteKing) thisPiece = new WhiteKing();
-                	if (components[0] instanceof BlackPawn) thisPiece = new BlackPawn();
-                	if (components[0] instanceof BlackCastle) thisPiece = new BlackCastle();
-                	if (components[0] instanceof BlackBishop) thisPiece = new BlackBishop();
-                	if (components[0] instanceof BlackHorse) thisPiece = new BlackHorse();
-                	if (components[0] instanceof BlackQueen) thisPiece = new BlackQueen();
-                	if (components[0] instanceof BlackKing) thisPiece = new BlackKing();
+            	if (components[0] instanceof WhitePawn) thisPiece = new WhitePawn();
+            	if (components[0] instanceof WhiteCastle) thisPiece = new WhiteCastle();
+            	if (components[0] instanceof WhiteBishop) thisPiece = new WhiteBishop();
+            	if (components[0] instanceof WhiteHorse) thisPiece = new WhiteHorse();
+            	if (components[0] instanceof WhiteQueen) thisPiece = new WhiteQueen();
+            	if (components[0] instanceof WhiteKing) thisPiece = new WhiteKing();
+            	if (components[0] instanceof BlackPawn) thisPiece = new BlackPawn();
+            	if (components[0] instanceof BlackCastle) thisPiece = new BlackCastle();
+            	if (components[0] instanceof BlackBishop) thisPiece = new BlackBishop();
+            	if (components[0] instanceof BlackHorse) thisPiece = new BlackHorse();
+            	if (components[0] instanceof BlackQueen) thisPiece = new BlackQueen();
+            	if (components[0] instanceof BlackKing) thisPiece = new BlackKing();
 
-                	selectedPiece = thisPiece;
-                	thisPiece.setCurrentCellOccupied(clickedCell);//input established//System.out.println(thisPawn.getClass()
-                													//+" @ "+clickedCell.getRow()+" "+clickedCell.getCol());
-                	
-                	if (thisPiece != null && ChessGame.isCurrentPlayersPiece(thisPiece)) {
-                		ArrayList<BoardCell> pmoves = ChessGame.getMoves(thisPiece);
-                		if (pmoves != null){
-                			for (BoardCell bc : pmoves){
-                				panelGrid[bc.getRow()][bc.getCol()].add(new PossibleMove());
-                			}
-                		}
-                	}
+            	
+            	selectedPiece = thisPiece;
+            	thisPiece.setCurrentCellOccupied(clickedCell);//input established//System.out.println(thisPawn.getClass()
+            													//+" @ "+clickedCell.getRow()+" "+clickedCell.getCol());
+            	
+            	if (thisPiece != null && ChessGame.isCurrentPlayersPiece(thisPiece)) {
+            		ArrayList<BoardCell> pmoves = ChessGame.getMoves(thisPiece);
+            		if (pmoves != null){
+            			for (BoardCell bc : pmoves){
+            				panelGrid[bc.getRow()][bc.getCol()].add(new PossibleMove());
+            			}
+            		}
             	}
             }
         	//if a piece has already been selected and this boardcell is a possible move for that piece, move
         	//the piece to this clicked boardcell
             else{
             	selected = false;
-            	if (components != null && components.length > 0){
-            		if (components[0] instanceof PossibleMove) {
-                		//System.out.println(getSelectedPiece().getCurrentCellOccupied().toString()+ " "+getSelectedPiece().getClass());
-                		Piece t = getSelectedPiece();
-                		clearPossibleMovesFromUI();
-                		JLabel t1 = (JLabel) t;
-                		clickedPanel.add(t1);
-                		
-                		//update the board(model)
-                		Move nextMove = new Move(t.getCurrentCellOccupied(), clickedCell, t);
-                		ChessGame.update(nextMove);
-                		
-                		//clear old cell in our view
-                		BoardCell toClear = getSelectedPiece().getCurrentCellOccupied();
-                		t.setCurrentCellOccupied(clickedCell);
-                		panelGrid[toClear.getRow()][toClear.getCol()].remove(0);
-                		
-                		//rotate the board and increment turn
-                		ChessGame.rotateToNextTurn();
-                		
-                		selectedPiece = null;
-                	}
-                	else{
-                		clearPossibleMovesFromUI();
-                	}
+            	if (components[0] instanceof PossibleMove) {
+            		//System.out.println(getSelectedPiece().getCurrentCellOccupied().toString()+ " "+getSelectedPiece().getClass());
+            		Piece t = getSelectedPiece();
+            		clearPossibleMovesFromUI();
+            		JLabel t1 = (JLabel) t;
+            		clickedPanel.add(t1);
+            		
+            		//update the board(model)
+            		Move nextMove = new Move(t.getCurrentCellOccupied(), clickedCell, t);
+            		ChessGame.update(nextMove);
+            		
+            		//clear old cell in our view
+            		BoardCell toClear = getSelectedPiece().getCurrentCellOccupied();
+            		t.setCurrentCellOccupied(clickedCell);
+            		panelGrid[toClear.getRow()][toClear.getCol()].remove(0);
+            		
+            		//rotate the board and increment turn
+            		ChessGame.rotateToNextTurn();
+            		
+            		
+            		selectedPiece = null;
+            	}
+            	else{
+            		clearPossibleMovesFromUI();
             	}
             }
         }
@@ -154,7 +152,7 @@ public class GUI extends JLayeredPane {
 
                 // remove label from panel
                 dragLabel = (JLabel) components[0];
-                clickedPanel.remove(dragLabel);
+                //clickedPanel.remove(dragLabel);
                 clickedPanel.revalidate();
                 clickedPanel.repaint();
 
@@ -214,8 +212,8 @@ public class GUI extends JLayeredPane {
                 } else {
                 	Component[] theseComponents = droppedPanel.getComponents();
                 	if (theseComponents.length == 0){
-                		clickedPanel.add(dragLabel);
-                        clickedPanel.revalidate();
+                		droppedPanel.add(dragLabel);
+                        droppedPanel.revalidate();
                 	}
                 }
             }

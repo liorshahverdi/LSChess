@@ -81,7 +81,7 @@ public class GUI extends JLayeredPane {
             if (!selected){
             	selected = true;
             	Piece thisPiece = null;
-            	if (components != null && components.length > 0){
+            	if (components != null){
             		if (components[0] instanceof WhitePawn) thisPiece = new WhitePawn();
                 	if (components[0] instanceof WhiteCastle) thisPiece = new WhiteCastle();
                 	if (components[0] instanceof WhiteBishop) thisPiece = new WhiteBishop();
@@ -95,6 +95,7 @@ public class GUI extends JLayeredPane {
                 	if (components[0] instanceof BlackQueen) thisPiece = new BlackQueen();
                 	if (components[0] instanceof BlackKing) thisPiece = new BlackKing();
 
+                	
                 	selectedPiece = thisPiece;
                 	thisPiece.setCurrentCellOccupied(clickedCell);//input established//System.out.println(thisPawn.getClass()
                 													//+" @ "+clickedCell.getRow()+" "+clickedCell.getCol());
@@ -113,7 +114,7 @@ public class GUI extends JLayeredPane {
         	//the piece to this clicked boardcell
             else{
             	selected = false;
-            	if (components != null && components.length > 0){
+            	if (components != null){
             		if (components[0] instanceof PossibleMove) {
                 		//System.out.println(getSelectedPiece().getCurrentCellOccupied().toString()+ " "+getSelectedPiece().getClass());
                 		Piece t = getSelectedPiece();

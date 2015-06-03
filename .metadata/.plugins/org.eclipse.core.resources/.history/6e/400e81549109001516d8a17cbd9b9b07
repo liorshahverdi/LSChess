@@ -87,6 +87,13 @@ public class GUI extends JLayeredPane {
             	if (components[0] instanceof WhiteHorse) thisPiece = new WhiteHorse();
             	if (components[0] instanceof WhiteQueen) thisPiece = new WhiteQueen();
             	if (components[0] instanceof WhiteKing) thisPiece = new WhiteKing();
+            	if (components[0] instanceof BlackPawn) thisPiece = new BlackPawn();
+            	if (components[0] instanceof BlackCastle) thisPiece = new BlackCastle();
+            	if (components[0] instanceof BlackBishop) thisPiece = new BlackBishop();
+            	if (components[0] instanceof BlackHorse) thisPiece = new BlackHorse();
+            	if (components[0] instanceof BlackQueen) thisPiece = new BlackQueen();
+            	if (components[0] instanceof BlackKing) thisPiece = new BlackKing();
+
             	
             	selectedPiece = thisPiece;
             	thisPiece.setCurrentCellOccupied(clickedCell);//input established//System.out.println(thisPawn.getClass()
@@ -107,12 +114,23 @@ public class GUI extends JLayeredPane {
             	selected = false;
             	if (components[0] instanceof PossibleMove) {
             		//System.out.println(getSelectedPiece().getCurrentCellOccupied().toString()+ " "+getSelectedPiece().getClass());
-            		Component t = (Component) getSelectedPiece();
+            		Piece t = getSelectedPiece();
             		clearPossibleMovesFromUI();
-            		clickedPanel.add(t);
+            		JLabel t1 = (JLabel) t;
+            		clickedPanel.add(t1);
             		
+            		//update the board(model)
+            		Move nextMove = new Move(t.getCurrentCellOccupied(), clickedCell, t);
+            		ChessGame.update(nextMove);
+            		
+            		//clear old cell in our view
             		BoardCell toClear = getSelectedPiece().getCurrentCellOccupied();
+            		t.setCurrentCellOccupied(clickedCell);
             		panelGrid[toClear.getRow()][toClear.getCol()].remove(0);
+            		
+            		//rotate the board and increment turn
+            		ChessGame.rotateToNextTurn();
+            		
             		selectedPiece = null;
             	}
             	else{
@@ -123,13 +141,13 @@ public class GUI extends JLayeredPane {
 
         @Override
         public void mousePressed(MouseEvent me) {
-            /*clickedPanel = (JPanel) backingPanel.getComponentAt(me.getPoint());
+            clickedPanel = (JPanel) backingPanel.getComponentAt(me.getPoint());
             Component[] components = clickedPanel.getComponents(); 
             if (components.length == 0) {
                 return;
             }
             // if we click on jpanel that holds a jlabel
-            if (components[0] instanceof JLabel) {
+            /*if (components[0] instanceof JLabel) {
 
                 // remove label from panel
                 dragLabel = (JLabel) components[0];
@@ -142,8 +160,11 @@ public class GUI extends JLayeredPane {
 
                 int x = me.getPoint().x - dragLabelWidthDiv2;
                 int y = me.getPoint().y - dragLabelHeightDiv2;
-                dragLabel.setLocation(x, y);
-                add(dragLabel, JLayeredPane.DRAG_LAYER);
+                
+                if (!(components[0] instanceof PossibleMove)){
+                	dragLabel.setLocation(x, y);
+                    add(dragLabel, JLayeredPane.DRAG_LAYER);
+                }
                 repaint();
             }*/
         }
@@ -189,10 +210,7 @@ public class GUI extends JLayeredPane {
                     clickedPanel.revalidate();
                 } else {
                 	Component[] theseComponents = droppedPanel.getComponents();
-                	if (theseComponents.length != 0){
-                		clickedPanel.add(dragLabel);
-                		clickedPanel.revalidate();
-                	} else{
+                	if (theseComponents.length == 0){
                 		droppedPanel.add(dragLabel);
                         droppedPanel.revalidate();
                 	}
@@ -265,6 +283,14 @@ public class GUI extends JLayeredPane {
 				}
 			}
 		}
+    }
+    
+    public static void clearUI(){
+    	for (JPanel[] x : panelGrid){
+    		for (JPanel y: x){
+    			y.removeAll();
+    		}
+    	}
     }
 
     public static void createAndShowUI() {
