@@ -61,7 +61,7 @@ public class ChessGame {
 	public static ArrayList<BoardCell> getMoves(Piece t){
 		ArrayList<BoardCell> moves = new ArrayList<BoardCell>();
 		if (t instanceof Piece){ //JOptionPane.showMessageDialog(view, t.getClass()+" "+t.getCurrentCellOccupied().toString());
-			moves.addAll(Board.ChessPiece.smartPossibleMoves(t.getCurrentCellOccupied()));
+			moves.addAll(Board.ChessPiece.possibleMoves(t.getCurrentCellOccupied()));
 			return moves;
 		}
 		return null;

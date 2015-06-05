@@ -1282,7 +1282,7 @@ public class Board {
 		}
 		
 		//computes full moves for each piece on the board
-		public static ArrayList<Move> possibleMoves(String[][] b){
+		public static ArrayList<Move> possibleMoves(String[][] b, int turn){
 			ArrayList<Move> p = new ArrayList<Move>();
 			
 			for (int i=0; i<8; i++){
@@ -1373,6 +1373,7 @@ public class Board {
 				}
 			}
 			
+			
 			return p;
 		}
 		
@@ -1402,17 +1403,10 @@ public class Board {
 		}
 		
 		public static boolean willLeaveUsInCheck(String[][] b){
-			ArrayList<Move> moves = ChessPiece.possibleMoves(b);
-			for (Move c : moves){
-				String destPieceStr = b[c.getToCell().getRow()][c.getToCell().getCol()];
-				ChessPiece destPiece = ChessPiece.getEnum(destPieceStr);
-				if (ChessGame.getThisTurnsPlayer() == 1 && destPiece == ChessPiece.WHITE_KING) return true;
-				if (ChessGame.getThisTurnsPlayer() == 2 && destPiece == ChessPiece.BLACK_KING) return true;
-			}
-			return false;
+			ArrayList<Move> moves = ChessPiece.possibleMoves(b, ChessGame.getThisTurnsPlayer());
 		}
 		
-		public static ArrayList<BoardCell> smartPossibleMoves(BoardCell x){
+		public static ArrayList<BoardCell> possibleMoves(BoardCell x){
 			ArrayList<BoardCell> temp = new ArrayList<BoardCell>();
 			int row = x.getRow();
 			int col = x.getCol();
@@ -1434,17 +1428,6 @@ public class Board {
 				if (piece == ChessPiece.BLACK_QUEEN) temp.addAll(blackQueenPossibleMoves(row,col));
 				if (piece == ChessPiece.BLACK_KING) temp.addAll(blackKingPossibleMoves(row,col));
 			}
-			
-			temp = boardCellEdit(temp, piece);
-			
-			return temp;
-		}
-		
-		public static ArrayList<BoardCell> boardCellEdit(ArrayList<BoardCell> x, ChessPiece c){
-			ArrayList<BoardCell> temp = new ArrayList<BoardCell>();
-			
-			
-			
 			return temp;
 		}
 	}

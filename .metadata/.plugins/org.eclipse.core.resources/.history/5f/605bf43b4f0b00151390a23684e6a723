@@ -1435,12 +1435,12 @@ public class Board {
 				if (piece == ChessPiece.BLACK_KING) temp.addAll(blackKingPossibleMoves(row,col));
 			}
 			
-			temp = boardCellEdit(temp, piece);
+			temp = boardCellEdit(temp);
 			
 			return temp;
 		}
 		
-		public static ArrayList<BoardCell> boardCellEdit(ArrayList<BoardCell> x, ChessPiece c){
+		public static ArrayList<BoardCell> boardCellEdit(ArrayList<BoardCell> x){
 			ArrayList<BoardCell> temp = new ArrayList<BoardCell>();
 			
 			

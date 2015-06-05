@@ -1412,7 +1412,7 @@ public class Board {
 			return false;
 		}
 		
-		public static ArrayList<BoardCell> smartPossibleMoves(BoardCell x){
+		public static ArrayList<BoardCell> possibleMoves(BoardCell x){
 			ArrayList<BoardCell> temp = new ArrayList<BoardCell>();
 			int row = x.getRow();
 			int col = x.getCol();
@@ -1434,17 +1434,6 @@ public class Board {
 				if (piece == ChessPiece.BLACK_QUEEN) temp.addAll(blackQueenPossibleMoves(row,col));
 				if (piece == ChessPiece.BLACK_KING) temp.addAll(blackKingPossibleMoves(row,col));
 			}
-			
-			temp = boardCellEdit(temp, piece);
-			
-			return temp;
-		}
-		
-		public static ArrayList<BoardCell> boardCellEdit(ArrayList<BoardCell> x, ChessPiece c){
-			ArrayList<BoardCell> temp = new ArrayList<BoardCell>();
-			
-			
-			
 			return temp;
 		}
 	}
