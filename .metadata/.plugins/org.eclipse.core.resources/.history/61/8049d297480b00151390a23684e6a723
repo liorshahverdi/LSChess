@@ -1342,34 +1342,32 @@ public class Board {
 									p.add(new Move(f,n, new BlackBishop()));
 								}
 							}
-							if (pm == ChessPiece.BLACK_CASTLE){
-								ArrayList<BoardCell> possiblet = blackCastlePossibleMoves(i,k);
+							if (pm == ChessPiece.WHITE_CASTLE){
+								ArrayList<BoardCell> possiblet = whiteCastlePossibleMoves(i,k);
 								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new BlackCastle()));
+									p.add(new Move(f,n, new WhiteCastle()));
 								}
 							}
-							if (pm == ChessPiece.BLACK_KNIGHT){
-								ArrayList<BoardCell> possiblet = blackKnightPossibleMoves(i,k);
+							if (pm == ChessPiece.WHITE_KNIGHT){
+								ArrayList<BoardCell> possiblet = whiteKnightPossibleMoves(i,k);
 								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new BlackHorse()));
+									p.add(new Move(f,n, new WhiteHorse()));
 								}
 							}
-							if (pm == ChessPiece.BLACK_QUEEN){
-								ArrayList<BoardCell> possiblet = blackQueenPossibleMoves(i,k);
+							if (pm == ChessPiece.WHITE_QUEEN){
+								ArrayList<BoardCell> possiblet = whiteQueenPossibleMoves(i,k);
 								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new BlackQueen()));
+									p.add(new Move(f,n, new WhiteQueen()));
 								}
 							}
-							if (pm == ChessPiece.BLACK_KING){
-								ArrayList<BoardCell> possiblet = blackKingPossibleMoves(i,k);
+							if (pm == ChessPiece.WHITE_KING){
+								ArrayList<BoardCell> possiblet = whiteKingPossibleMoves(i,k);
 								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new BlackKing()));
+									p.add(new Move(f,n, new WhiteKing()));
 								}
 							}
 						}
 					}
-					
-					
 				}
 			}
 			

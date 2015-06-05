@@ -1285,94 +1285,8 @@ public class Board {
 		public static ArrayList<Move> possibleMoves(String[][] b, int turn){
 			ArrayList<Move> p = new ArrayList<Move>();
 			
-			for (int i=0; i<8; i++){
-				for (int k=0; k<8; k++){
-					ChessPiece pm = ChessPiece.getEnum(board[i][k]);
-					if (pm != ChessPiece.EMPTY) 
-					{
-						BoardCell f = new BoardCell(i,k);
-						if (ChessGame.getThisTurnsPlayer() == 1) {
-							if (pm == ChessPiece.WHITE_PAWN){
-								ArrayList<BoardCell> possiblet = whitePawnPossibleMoves(i,k);
-								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new WhitePawn()));
-								}
-							}
-							if (pm == ChessPiece.WHITE_BISHOP){
-								ArrayList<BoardCell> possiblet = whiteBishopPossibleMoves(i,k);
-								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new WhiteBishop()));
-								}
-							}
-							if (pm == ChessPiece.WHITE_CASTLE){
-								ArrayList<BoardCell> possiblet = whiteCastlePossibleMoves(i,k);
-								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new WhiteCastle()));
-								}
-							}
-							if (pm == ChessPiece.WHITE_KNIGHT){
-								ArrayList<BoardCell> possiblet = whiteKnightPossibleMoves(i,k);
-								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new WhiteHorse()));
-								}
-							}
-							if (pm == ChessPiece.WHITE_QUEEN){
-								ArrayList<BoardCell> possiblet = whiteQueenPossibleMoves(i,k);
-								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new WhiteQueen()));
-								}
-							}
-							if (pm == ChessPiece.WHITE_KING){
-								ArrayList<BoardCell> possiblet = whiteKingPossibleMoves(i,k);
-								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new WhiteKing()));
-								}
-							}
-						}
-						else {
-							if (pm == ChessPiece.BLACK_PAWN){
-								ArrayList<BoardCell> possiblet = blackPawnPossibleMoves(i,k);
-								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new BlackPawn()));
-								}
-							}
-							if (pm == ChessPiece.BLACK_BISHOP){
-								ArrayList<BoardCell> possiblet = blackBishopPossibleMoves(i,k);
-								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new BlackBishop()));
-								}
-							}
-							if (pm == ChessPiece.BLACK_CASTLE){
-								ArrayList<BoardCell> possiblet = blackCastlePossibleMoves(i,k);
-								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new BlackCastle()));
-								}
-							}
-							if (pm == ChessPiece.BLACK_KNIGHT){
-								ArrayList<BoardCell> possiblet = blackKnightPossibleMoves(i,k);
-								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new BlackHorse()));
-								}
-							}
-							if (pm == ChessPiece.BLACK_QUEEN){
-								ArrayList<BoardCell> possiblet = blackQueenPossibleMoves(i,k);
-								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new BlackQueen()));
-								}
-							}
-							if (pm == ChessPiece.BLACK_KING){
-								ArrayList<BoardCell> possiblet = blackKingPossibleMoves(i,k);
-								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new BlackKing()));
-								}
-							}
-						}
-					}
-					
-					
-				}
-			}
-			
+			//now this part is the challenge
+		
 			
 			return p;
 		}
@@ -1383,7 +1297,8 @@ public class Board {
 			int col = x.getCol();
 			String piece_str = board[row][col];
 			ChessPiece piece = getEnum(piece_str);
-			if (ChessGame.getThisTurnsPlayer() == 1){//white's moves
+			if (ChessGame.getThisTurnsPlayer() == 1){
+				//white's moves
 				if (piece == ChessPiece.WHITE_PAWN) temp.addAll(whitePawnPossibleMoves(row,col));
 				if (piece == ChessPiece.WHITE_BISHOP) temp.addAll(whiteBishopPossibleMoves(row,col));
 				if (piece == ChessPiece.WHITE_CASTLE) temp.addAll(whiteCastlePossibleMoves(row,col));
@@ -1391,7 +1306,8 @@ public class Board {
 				if (piece == ChessPiece.WHITE_QUEEN) temp.addAll(whiteQueenPossibleMoves(row,col));
 				if (piece == ChessPiece.WHITE_KING) temp.addAll(whiteKingPossibleMoves(row,col));
 			}
-			else {//black's moves
+			else {
+				//black's moves
 				if (piece == ChessPiece.BLACK_PAWN) temp.addAll(blackPawnPossibleMoves(row,col));
 				if (piece == ChessPiece.BLACK_BISHOP) temp.addAll(blackBishopPossibleMoves(row,col));
 				if (piece == ChessPiece.BLACK_CASTLE) temp.addAll(blackCastlePossibleMoves(row,col));
