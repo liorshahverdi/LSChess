@@ -16,14 +16,9 @@ public class GUI extends JLayeredPane {
     private static final Dimension LABEL_SIZE = new Dimension(60, 40);
     private GridLayout gridlayout = new GridLayout(GRID_ROWS, GRID_COLS, GAP, GAP);
     private JPanel backingPanel = new JPanel(gridlayout);
-    private static JPanel[][] panelGrid = new JPanel[GRID_ROWS][GRID_COLS];
-    
-    private static boolean isBlacksTurn;
-    private static boolean isWhitesTurn;
-        
+    private static JPanel[][] panelGrid = new JPanel[GRID_ROWS][GRID_COLS];    
     boolean selected = false;
     private static Piece selectedPiece;
-    
     public static Piece getSelectedPiece() { return selectedPiece; }
     
     public GUI() {
@@ -161,8 +156,8 @@ public class GUI extends JLayeredPane {
                 dragLabelWidthDiv2 = dragLabel.getWidth() / 2;
                 dragLabelHeightDiv2 = dragLabel.getHeight() / 2;
 
-                int x = me.getPoint().x - dragLabelWidthDiv2;
-                int y = me.getPoint().y - dragLabelHeightDiv2;
+                int x = me.getPoint().x;// - dragLabelWidthDiv2;
+                int y = me.getPoint().y;// - dragLabelHeightDiv2;
                 
                 if (!(components[0] instanceof PossibleMove)){
                 	dragLabel.setLocation(x, y);

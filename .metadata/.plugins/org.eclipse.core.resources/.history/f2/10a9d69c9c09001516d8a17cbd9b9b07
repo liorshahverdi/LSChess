@@ -60,7 +60,8 @@ public class ChessGame {
 	//returns the possible moves for the selected piece as an array list of board cells
 	public static ArrayList<BoardCell> getMoves(Piece t){
 		ArrayList<BoardCell> moves = new ArrayList<BoardCell>();
-		if (t instanceof Piece){ //JOptionPane.showMessageDialog(view, t.getClass()+" "+t.getCurrentCellOccupied().toString());
+		if (t instanceof Piece){
+			//JOptionPane.showMessageDialog(view, t.getClass()+" "+t.getCurrentCellOccupied().toString());
 			moves.addAll(Board.ChessPiece.possibleMoves(t.getCurrentCellOccupied()));
 			return moves;
 		}
@@ -113,6 +114,21 @@ public class ChessGame {
 		if (check) JOptionPane.showMessageDialog(view, "Check.");*/
 		return true;
 	}
+	
+	/*public static void startGameLoop(){
+		boolean keepPlaying = true;
+		while (keepPlaying){
+			System.out.println("Current Player's Turn -> "+getThisTurnsPlayer());
+			if (gameOver()){
+				keepPlaying = false;			
+			}
+			else{
+				ct++;
+				continue;
+				//flipMat();
+			}
+		}
+	}*/
 	
 	public static void main(String[] args){
 		java.awt.EventQueue.invokeLater(new Runnable() {

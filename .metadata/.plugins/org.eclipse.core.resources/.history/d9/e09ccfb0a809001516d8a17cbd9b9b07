@@ -1282,11 +1282,8 @@ public class Board {
 		}
 		
 		//computes full moves for each piece on the board
-		public static ArrayList<Move> possibleMoves(String[][] b, int turn){
+		public static ArrayList<Move> possibleMoves(String[][] b){
 			ArrayList<Move> p = new ArrayList<Move>();
-			
-			//now this part is the challenge
-		
 			
 			return p;
 		}

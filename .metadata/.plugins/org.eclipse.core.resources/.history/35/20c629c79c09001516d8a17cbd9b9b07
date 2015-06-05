@@ -114,6 +114,21 @@ public class ChessGame {
 		return true;
 	}
 	
+	/*public static void startGameLoop(){
+		boolean keepPlaying = true;
+		while (keepPlaying){
+			System.out.println("Current Player's Turn -> "+getThisTurnsPlayer());
+			if (gameOver()){
+				keepPlaying = false;			
+			}
+			else{
+				ct++;
+				continue;
+				//flipMat();
+			}
+		}
+	}*/
+	
 	public static void main(String[] args){
 		java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

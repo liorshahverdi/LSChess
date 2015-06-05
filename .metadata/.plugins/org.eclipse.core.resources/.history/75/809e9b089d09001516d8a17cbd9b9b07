@@ -37,6 +37,44 @@ public class Board {
 		board = newMat;
 	}
 	
+	public static void printForP1()
+	{
+		int c = 8;
+		System.out.println("\ta\tb\tc\td\te\tf\tg\th\t");
+		System.out.println("---------------------------------------------------------------------------");
+		for (String[] row : board)
+		{
+			System.out.print(c+"|\t");
+		    for (String value : row)
+		    {
+		    	if (value == null) System.out.println("null\t");
+		    	if (value.equals("-")) System.out.print("-\t");
+		    	else System.out.print(value+"\t");
+		    }
+		    System.out.print("|"+c+"\n\n");
+		    c--;
+		}
+		System.out.println("---------------------------------------------------------------------------");
+		System.out.println("\ta\tb\tc\td\te\tf\tg\th\t\n");
+	}
+	
+	public static void printForP2()
+	{
+		System.out.println("\th\tg\tf\te\td\tc\tb\ta\t");
+		System.out.println("---------------------------------------------------------------------------");
+		for (int j=7; j>-1; j--){
+			System.out.print((j+1)+"|\t");
+			for (int i=7; i>-1; i--){
+				if (board[j][i] == null) System.out.println("null\t");
+		    	if (board[j][i].equals("-")) System.out.print("-\t");
+		    	else System.out.print(board[j][i].toString()+"\t");
+			}
+			System.out.print("|"+(j+1)+"\n\n");
+		}
+		System.out.println("---------------------------------------------------------------------------");
+		System.out.println("\th\tg\tf\te\td\tc\tb\ta\t\n");
+	}
+	
 	public enum ChessPiece {
 		//possible pieces or empty tiles
 		WHITE_CASTLE("w_c"), WHITE_KNIGHT("w_h"), WHITE_BISHOP("w_b"), WHITE_QUEEN("w_q"), WHITE_KING("w_k"), WHITE_PAWN("w_p"),
@@ -1282,11 +1320,15 @@ public class Board {
 		}
 		
 		//computes full moves for each piece on the board
-		public static ArrayList<Move> possibleMoves(String[][] b, int turn){
+		public static ArrayList<Move> possibleMoves(){
 			ArrayList<Move> p = new ArrayList<Move>();
 			
-			//now this part is the challenge
-		
+			for (String[] x : board){
+				for (String y : x){
+					ChessPiece piece = ChessPiece.getEnum(y);
+					
+				}
+			}
 			
 			return p;
 		}
@@ -1319,41 +1361,3 @@ public class Board {
 		}
 	}
 }
-
-/*public static void printForP1()
-{
-	int c = 8;
-	System.out.println("\ta\tb\tc\td\te\tf\tg\th\t");
-	System.out.println("---------------------------------------------------------------------------");
-	for (String[] row : board)
-	{
-		System.out.print(c+"|\t");
-	    for (String value : row)
-	    {
-	    	if (value == null) System.out.println("null\t");
-	    	if (value.equals("-")) System.out.print("-\t");
-	    	else System.out.print(value+"\t");
-	    }
-	    System.out.print("|"+c+"\n\n");
-	    c--;
-	}
-	System.out.println("---------------------------------------------------------------------------");
-	System.out.println("\ta\tb\tc\td\te\tf\tg\th\t\n");
-}
-
-public static void printForP2()
-{
-	System.out.println("\th\tg\tf\te\td\tc\tb\ta\t");
-	System.out.println("---------------------------------------------------------------------------");
-	for (int j=7; j>-1; j--){
-		System.out.print((j+1)+"|\t");
-		for (int i=7; i>-1; i--){
-			if (board[j][i] == null) System.out.println("null\t");
-	    	if (board[j][i].equals("-")) System.out.print("-\t");
-	    	else System.out.print(board[j][i].toString()+"\t");
-		}
-		System.out.print("|"+(j+1)+"\n\n");
-	}
-	System.out.println("---------------------------------------------------------------------------");
-	System.out.println("\th\tg\tf\te\td\tc\tb\ta\t\n");
-}*/
