@@ -1380,8 +1380,6 @@ public class Board {
 		public static ArrayList<Move> edit(ArrayList<Move> g){
 			ArrayList<Move> temp = new ArrayList<Move>();
 			
-			
-			
 			return temp;
 		}
 		

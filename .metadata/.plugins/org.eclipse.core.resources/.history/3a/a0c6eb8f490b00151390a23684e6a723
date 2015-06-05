@@ -1369,20 +1369,12 @@ public class Board {
 						}
 					}
 					
-					p = edit(p);
+					
 				}
 			}
 			
 			
 			return p;
-		}
-		
-		public static ArrayList<Move> edit(ArrayList<Move> g){
-			ArrayList<Move> temp = new ArrayList<Move>();
-			
-			
-			
-			return temp;
 		}
 		
 		public static ArrayList<BoardCell> possibleMoves(BoardCell x){
