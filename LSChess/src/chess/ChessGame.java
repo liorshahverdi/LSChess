@@ -88,7 +88,7 @@ public class ChessGame {
 	}
 	
 	public static boolean gameOver(){
-		/*ArrayList<Move> moves = Board.ChessPiece.possibleMoves();
+		ArrayList<Move> moves = Board.ChessPiece.possibleMoves(model.getBoard());
 		int numOfCurrentPlayersMoves = 0;
 		for (Move r : moves){
 			Piece p = r.getMovedPiece();
@@ -110,7 +110,7 @@ public class ChessGame {
 			}
 		}
 		if (numOfCurrentPlayersMoves == 0 && check) return true;
-		if (check) JOptionPane.showMessageDialog(view, "Check.");*/
+		if (check) JOptionPane.showMessageDialog(view, "Check.");
 		return true;
 	}
 	
