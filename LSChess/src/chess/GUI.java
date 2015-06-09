@@ -127,9 +127,7 @@ public class GUI extends JLayeredPane {
                 		
                 		//rotate the board and increment turn
                 		ChessGame.rotateToNextTurn();
-                		
-                		selectedPiece = null;
-                	}
+                   	}
                 	else{
                 		clearPossibleMovesFromUI();
                 	}

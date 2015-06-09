@@ -1401,11 +1401,9 @@ public class Board {
 				myBoardDeepCopy[bc.getRow()][bc.getCol()] = myBoardDeepCopy[g.getRow()][g.getCol()];
 				myBoardDeepCopy[g.getRow()][g.getCol()] = "-";
 				if (!willLeaveUsInCheck(myBoardDeepCopy)) {
-					System.out.println(bc.toString()+"wont leave us in check");
 					temp.add(bc);
 				}
 			}
-			System.out.println("Size is "+temp.size());
 			
 			return temp;
 		}
@@ -1431,8 +1429,6 @@ public class Board {
 				ChessPiece destPiece = ChessPiece.getEnum(destPieceStr);
 				if (ChessGame.getThisTurnsPlayer() == 1 && destPiece == ChessPiece.WHITE_KING) return true;
 				if (ChessGame.getThisTurnsPlayer() == 2 && destPiece == ChessPiece.BLACK_KING) return true;
-				
-				//System.out.println(c.toString());
 			}
 			return false;
 		}
@@ -1466,6 +1462,14 @@ public class Board {
 		}
 	}
 
+
+public static boolean isCheckMove(Move s){
+	ChessPiece pm = ChessPiece.getEnum(board[s.getToCell().getRow()][s.getToCell().getCol()]);
+	int turn = ChessGame.getThisTurnsPlayer();
+	if (turn == 1 && pm == ChessPiece.BLACK_KING) return true;
+	if (turn == 2 && pm == ChessPiece.WHITE_KING) return true;
+	return false;
+}
 
 public static void printForP1(String[][] b)
 {

@@ -84,6 +84,22 @@ public class ChessGame {
 		//model.printForP1();
 		view.clearUI();
 		view.loadDataToBoardUI(model);
+		
+		if (!Board.ChessPiece.willLeaveUsInCheck(b.getBoard())) check = false;
+		ArrayList<Move> post_move = Board.ChessPiece.possibleMoves(b.getBoard());
+		System.out.println("size of mv collection = "+post_move.size());
+		for (Move m : post_move){
+			System.out.println(m.toString());
+			/*if (m.getIsKill()){
+				boolean isCheckMove = Board.isCheckMove(m);
+				if (isCheckMove) check = true;
+			}*/
+		}
+		
+		System.out.println("Check = "+check);
+		
+		boolean keepPlaying = gameOver();
+		
 		ct++;
 	}
 	
@@ -109,9 +125,11 @@ public class ChessGame {
 				System.exit(0);
 			}
 		}
-		if (numOfCurrentPlayersMoves == 0 && check) return true;
+		if (numOfCurrentPlayersMoves == 0 && check) {
+			return true;
+		}
 		if (check) JOptionPane.showMessageDialog(view, "Check.");
-		return true;
+		return false;
 	}
 	
 	public static void main(String[] args){

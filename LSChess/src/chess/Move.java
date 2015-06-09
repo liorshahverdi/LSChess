@@ -23,6 +23,7 @@ public class Move {
 	public BoardCell getFromCell() { return fromCell; }
 	public BoardCell getToCell() { return toCell; }
 	public Piece getMovedPiece() { return movedPiece; }
+	public boolean getIsKill() { return isKill; }
 	
 	public String toString(){ return "From="+this.fromCell.toString()+"\tTo="+this.toCell.toString()
 			+"\tPiece="+this.movedPiece.getClass(); }
