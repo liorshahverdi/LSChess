@@ -1189,7 +1189,6 @@ public class Board {
 		
 		public static ArrayList<BoardCell> blackKingPossibleMoves(int row, int col, String[][] b){
 			ArrayList<BoardCell> p = new ArrayList<BoardCell>();
-			
 			if (row-1 != -1){
 				ChessPiece pm = ChessPiece.getEnum(b[row-1][col]);
 				if (pm == ChessPiece.EMPTY){
@@ -1383,6 +1382,22 @@ public class Board {
 			return p;
 		}
 		
+		public static Piece equivalentPiece(ChessPiece p){
+			switch (p){
+				case WHITE_PAWN: return new WhitePawn();
+				case WHITE_BISHOP: return new WhiteBishop();
+				case WHITE_CASTLE: return new WhiteCastle();
+				case WHITE_QUEEN: return new WhiteQueen();
+				case WHITE_KING: return new WhiteKing();
+				case BLACK_PAWN: return new BlackPawn();
+				case BLACK_BISHOP: return new BlackBishop();
+				case BLACK_CASTLE: return new BlackCastle();
+				case BLACK_QUEEN: return new BlackQueen();
+				case BLACK_KING: return new BlackKing();
+				default: return null;
+			}
+		}
+		
 		public static String[][] deepCopy(String[][] x) {
 			String[][] temp = new String[8][8];
 			for (int i=0; i<8; i++) {
@@ -1425,10 +1440,9 @@ public class Board {
 		public static boolean willLeaveUsInCheck(String[][] b){
 			ArrayList<Move> moves = ChessPiece.possibleMoves(b);
 			for (Move c : moves){
-				String destPieceStr = b[c.getToCell().getRow()][c.getToCell().getCol()];
-				ChessPiece destPiece = ChessPiece.getEnum(destPieceStr);
-				if (ChessGame.getThisTurnsPlayer() == 1 && destPiece == ChessPiece.WHITE_KING) return true;
-				if (ChessGame.getThisTurnsPlayer() == 2 && destPiece == ChessPiece.BLACK_KING) return true;
+				Piece destPiece = c.getTargetedPiece();
+				if (ChessGame.getThisTurnsPlayer() == 1 && destPiece instanceof WhiteKing) return true;
+				if (ChessGame.getThisTurnsPlayer() == 2 && destPiece instanceof BlackKing) return true;
 			}
 			return false;
 		}

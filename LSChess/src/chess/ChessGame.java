@@ -86,19 +86,12 @@ public class ChessGame {
 		view.loadDataToBoardUI(model);
 		
 		if (!Board.ChessPiece.willLeaveUsInCheck(b.getBoard())) check = false;
-		ArrayList<Move> post_move = Board.ChessPiece.possibleMoves(b.getBoard());
-		System.out.println("size of mv collection = "+post_move.size());
-		for (Move m : post_move){
-			System.out.println(m.toString());
-			/*if (m.getIsKill()){
-				boolean isCheckMove = Board.isCheckMove(m);
-				if (isCheckMove) check = true;
-			}*/
+		ArrayList<Move> post_move_ops = Board.ChessPiece.possibleMoves(b.getBoard());
+		for (Move x : post_move_ops){
+			Piece targetPiece = x.getTargetedPiece();
+			if (getThisTurnsPlayer()==1 && targetPiece instanceof BlackKing) check = true;
+			else if (getThisTurnsPlayer()==2 && targetPiece instanceof WhiteKing) check = true;
 		}
-		
-		System.out.println("Check = "+check);
-		
-		boolean keepPlaying = gameOver();
 		
 		ct++;
 	}
