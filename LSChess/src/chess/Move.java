@@ -26,5 +26,5 @@ public class Move {
 	public Piece getTargetedPiece() { return targetedPiece; }
 	
 	public String toString(){ return "From="+this.fromCell.toString()+"\tTo="+this.toCell.toString()
-			+"\tPiece="+this.movedPiece.getClass(); }
+			+"\tmovedPiece="+this.movedPiece.getClass(); }
 }

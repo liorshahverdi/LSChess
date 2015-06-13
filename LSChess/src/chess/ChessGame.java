@@ -27,6 +27,11 @@ public class ChessGame {
 		else return 2;
 	}
 	
+	public static String getOppositeTurnsPlayer(){
+		if (getThisTurnsPlayer() == 1) return "Black";
+		else return "White";
+	}
+	
 	public static boolean isWhitePiece(Piece t){
 		if (t instanceof WhitePawn ||
 			t instanceof WhiteHorse ||
@@ -74,7 +79,6 @@ public class ChessGame {
 		
 		model.setLocation(from, "-");
 		model.setLocation(to, p.getEnumVal().getStr());
-		//model.printForP1();
 	}
 	
 	//flips the matrix so the next player can play as 1st player and loads it to the view
@@ -94,10 +98,17 @@ public class ChessGame {
 		}
 		
 		ct++;
+		
+		boolean dontKeepPlaying = gameOver();
+		if (dontKeepPlaying){
+			JOptionPane.showMessageDialog(view, getOppositeTurnsPlayer()+" Won by Checkmate");
+			System.exit(0);
+		}
 	}
 	
 	public static boolean gameOver(){
 		ArrayList<Move> moves = Board.ChessPiece.possibleMoves(model.getBoard());
+		moves = Board.ChessPiece.edit(moves);
 		int numOfCurrentPlayersMoves = 0;
 		for (Move r : moves){
 			Piece p = r.getMovedPiece();

@@ -7,23 +7,23 @@ public class Board {
 	public Board(){
 		board = new String[][] { 
 				
-				{"-",  "b_k"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
+				/*{"-",  "b_k"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-","-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"w_c"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"w_c"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-", "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
-				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"}
+				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"}*/
 				
-				/*{"b_c","b_h","b_b","b_q","b_k","b_b","b_h","b_c"},
+				{"b_c","b_h","b_b","b_q","b_k","b_b","b_h","b_c"},
 				{"b_p","b_p","b_p","b_p","b_p","b_p","b_p","b_p"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"w_p","w_p","w_p","w_p","w_p","w_p","w_p","w_p"},
-				{"w_c","w_h","w_b","w_q","w_k","w_b","w_h","w_c"}*/ };
+				{"w_c","w_h","w_b","w_q","w_k","w_b","w_h","w_c"} };
 	}
 	
 	public String[][] getBoard() { return board; }
@@ -1129,7 +1129,7 @@ public class Board {
 			dt = 1;
 			boolean collision_bl = false;
 			while (!collision_bl){
-				if(row+dt >= 8) break;
+				if(row+dt >= 8 || col-dt <=-1) break;
 				ChessPiece pm = ChessPiece.getEnum(b[row+dt][col-dt]);
 				if (pm != ChessPiece.EMPTY){
 					if (isWhite(pm)){
@@ -1303,75 +1303,133 @@ public class Board {
 							if (pm == ChessPiece.WHITE_PAWN){
 								ArrayList<BoardCell> possiblet = whitePawnPossibleMoves(i,k,b);
 								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new WhitePawn()));
+									if (n.getIsKill()){
+										ChessPiece tp = ChessPiece.getEnum(b[n.getRow()][n.getCol()]);
+										Piece tpp = equivalentPiece(tp);
+										p.add(new Move(f,n,new WhitePawn(), tpp));
+									}
+									else p.add(new Move(f,n, new WhitePawn()));
 								}
 							}
 							if (pm == ChessPiece.WHITE_BISHOP){
 								ArrayList<BoardCell> possiblet = whiteBishopPossibleMoves(i,k,b);
 								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new WhiteBishop()));
+									if (n.getIsKill()){
+										ChessPiece tp = ChessPiece.getEnum(b[n.getRow()][n.getCol()]);
+										Piece tpp = equivalentPiece(tp);
+										p.add(new Move(f,n,new WhiteBishop(), tpp));
+									}
+									else p.add(new Move(f,n, new WhiteBishop()));
 								}
 							}
 							if (pm == ChessPiece.WHITE_CASTLE){
 								ArrayList<BoardCell> possiblet = whiteCastlePossibleMoves(i,k,b);
 								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new WhiteCastle()));
+									if (n.getIsKill()){
+										ChessPiece tp = ChessPiece.getEnum(b[n.getRow()][n.getCol()]);
+										Piece tpp = equivalentPiece(tp);
+										p.add(new Move(f,n,new WhiteCastle(), tpp));
+									}
+									else p.add(new Move(f,n, new WhiteCastle()));
 								}
 							}
 							if (pm == ChessPiece.WHITE_KNIGHT){
 								ArrayList<BoardCell> possiblet = whiteKnightPossibleMoves(i,k,b);
 								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new WhiteHorse()));
+									if (n.getIsKill()){
+										ChessPiece tp = ChessPiece.getEnum(b[n.getRow()][n.getCol()]);
+										Piece tpp = equivalentPiece(tp);
+										p.add(new Move(f,n,new WhiteHorse(), tpp));
+									}
+									else p.add(new Move(f,n, new WhiteHorse()));
 								}
 							}
 							if (pm == ChessPiece.WHITE_QUEEN){
 								ArrayList<BoardCell> possiblet = whiteQueenPossibleMoves(i,k,b);
 								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new WhiteQueen()));
+									if (n.getIsKill()){
+										ChessPiece tp = ChessPiece.getEnum(b[n.getRow()][n.getCol()]);
+										Piece tpp = equivalentPiece(tp);
+										p.add(new Move(f,n,new WhiteQueen(), tpp));
+									}
+									else p.add(new Move(f,n, new WhiteQueen()));
 								}
 							}
 							if (pm == ChessPiece.WHITE_KING){
 								ArrayList<BoardCell> possiblet = whiteKingPossibleMoves(i,k,b);
 								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new WhiteKing()));
+									if (n.getIsKill()){
+										ChessPiece tp = ChessPiece.getEnum(b[n.getRow()][n.getCol()]);
+										Piece tpp = equivalentPiece(tp);
+										p.add(new Move(f,n,new WhiteKing(), tpp));
+									}
+									else p.add(new Move(f,n, new WhiteKing()));
 								}
 							}
-						//}
-						//else {
 							if (pm == ChessPiece.BLACK_PAWN){
 								ArrayList<BoardCell> possiblet = blackPawnPossibleMoves(i,k,b);
 								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new BlackPawn()));
+									if (n.getIsKill()){
+										ChessPiece tp = ChessPiece.getEnum(b[n.getRow()][n.getCol()]);
+										Piece tpp = equivalentPiece(tp);
+										p.add(new Move(f,n,new BlackPawn(), tpp));
+									}
+									else p.add(new Move(f,n, new BlackPawn()));
 								}
 							}
 							if (pm == ChessPiece.BLACK_BISHOP){
 								ArrayList<BoardCell> possiblet = blackBishopPossibleMoves(i,k,b);
 								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new BlackBishop()));
+									if (n.getIsKill()){
+										ChessPiece tp = ChessPiece.getEnum(b[n.getRow()][n.getCol()]);
+										Piece tpp = equivalentPiece(tp);
+										p.add(new Move(f,n,new BlackBishop(), tpp));
+									}
+									else p.add(new Move(f,n, new BlackBishop()));
 								}
 							}
 							if (pm == ChessPiece.BLACK_CASTLE){
 								ArrayList<BoardCell> possiblet = blackCastlePossibleMoves(i,k,b);
 								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new BlackCastle()));
+									if (n.getIsKill()){
+										ChessPiece tp = ChessPiece.getEnum(b[n.getRow()][n.getCol()]);
+										Piece tpp = equivalentPiece(tp);
+										p.add(new Move(f,n,new BlackCastle(), tpp));
+									}
+									else p.add(new Move(f,n, new BlackCastle()));
 								}
 							}
 							if (pm == ChessPiece.BLACK_KNIGHT){
 								ArrayList<BoardCell> possiblet = blackKnightPossibleMoves(i,k,b);
 								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new BlackHorse()));
+									if (n.getIsKill()){
+										ChessPiece tp = ChessPiece.getEnum(b[n.getRow()][n.getCol()]);
+										Piece tpp = equivalentPiece(tp);
+										p.add(new Move(f,n,new BlackHorse(), tpp));
+									}
+									else p.add(new Move(f,n, new BlackHorse()));
 								}
 							}
 							if (pm == ChessPiece.BLACK_QUEEN){
 								ArrayList<BoardCell> possiblet = blackQueenPossibleMoves(i,k,b);
 								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new BlackQueen()));
+									if (n.getIsKill()){
+										ChessPiece tp = ChessPiece.getEnum(b[n.getRow()][n.getCol()]);
+										Piece tpp = equivalentPiece(tp);
+										p.add(new Move(f,n,new BlackQueen(), tpp));
+									}
+									else p.add(new Move(f,n, new BlackQueen()));
 								}
 							}
 							if (pm == ChessPiece.BLACK_KING){
 								ArrayList<BoardCell> possiblet = blackKingPossibleMoves(i,k,b);
 								for (BoardCell n : possiblet){
-									p.add(new Move(f,n, new BlackKing()));
+									if (n.getIsKill()){
+										ChessPiece tp = ChessPiece.getEnum(b[n.getRow()][n.getCol()]);
+										Piece tpp = equivalentPiece(tp);
+										p.add(new Move(f,n,new BlackKing(), tpp));
+									}
+									else p.add(new Move(f,n, new BlackKing()));
 								}
 							}
 						//}
@@ -1408,7 +1466,7 @@ public class Board {
 			return temp;
 		}
 		
-		public static ArrayList<BoardCell> boardCellEdit(ArrayList<BoardCell> x, ChessPiece c, BoardCell g){
+		public static ArrayList<BoardCell> boardCellEdit(ArrayList<BoardCell> x, BoardCell g){
 			ArrayList<BoardCell> temp = new ArrayList<BoardCell>();
 			
 			for (BoardCell bc : x){
@@ -1470,7 +1528,7 @@ public class Board {
 				if (piece == ChessPiece.BLACK_KING) temp.addAll(blackKingPossibleMoves(row,col,board));
 			}
 			
-			temp = boardCellEdit(temp, piece, x);
+			temp = boardCellEdit(temp, x);
 			
 			return temp;
 		}
