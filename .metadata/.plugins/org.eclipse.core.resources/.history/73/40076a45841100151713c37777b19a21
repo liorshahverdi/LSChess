@@ -1,0 +1,12 @@
+package chess;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class Target extends JLabel{
+	private static ImageIcon img = new ImageIcon("Images\\target.png");
+	
+	public Target(){
+		super(img);
+	}
+}

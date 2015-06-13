@@ -4,8 +4,6 @@ import javax.swing.*;
 
 import chess.Board.ChessPiece;
 
-import java.awt.*;
-
 public class WhiteBishop extends JLabel implements Piece{
 	private static ImageIcon img = new ImageIcon("Images\\white-bishop.png");
 	private static BoardCell currentCellOccupied;

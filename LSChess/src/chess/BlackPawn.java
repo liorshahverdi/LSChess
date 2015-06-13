@@ -4,8 +4,6 @@ import javax.swing.*;
 
 import chess.Board.ChessPiece;
 
-import java.awt.*;
-
 public class BlackPawn extends JLabel implements Piece{
 	private static ImageIcon img = new ImageIcon("Images\\black-pawn.png");
 	private BoardCell currentCellOccupied;

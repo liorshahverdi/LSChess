@@ -1,0 +1,306 @@
+package chess;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.util.*;
+import chess.Board.ChessPiece;
+
+public class GUI extends JLayeredPane {
+    public static final int WIDTH = 1080;
+    public static final int HEIGHT = 780;
+    private static final int GRID_ROWS = 8;
+    private static final int GRID_COLS = 8;
+    private static final int GAP = 3;
+    private static final Dimension LAYERED_PANE_SIZE = new Dimension(WIDTH, HEIGHT);
+    private static final Dimension LABEL_SIZE = new Dimension(60, 40);
+    private GridLayout gridlayout = new GridLayout(GRID_ROWS, GRID_COLS, GAP, GAP);
+    private JPanel backingPanel = new JPanel(gridlayout);
+    private static JPanel[][] panelGrid = new JPanel[GRID_ROWS][GRID_COLS];    
+    boolean selected = false;
+    private static Piece selectedPiece;
+    public static Piece getSelectedPiece() { return selectedPiece; }
+    
+    public GUI() {
+    	backingPanel.setSize(LAYERED_PANE_SIZE);
+        backingPanel.setLocation(2 * GAP, 2 * GAP);
+        backingPanel.setBackground(Color.gray);
+        selectedPiece = null;
+        int k=0;
+        for (int row = 0; row < GRID_ROWS; row++) {
+            for (int col = 0; col < GRID_COLS; col++) {
+                panelGrid[row][col] = new JPanel(new GridBagLayout());
+                backingPanel.add(panelGrid[row][col]);
+                if (row==0 || row==2 || row==4 || row==6){
+                	if (col%2==0) panelGrid[row][col].setBackground(Color.white);
+                	else panelGrid[row][col].setBackground(Color.gray);
+                }
+                else{
+                	if (col%2==0) panelGrid[row][col].setBackground(Color.gray);
+                	else panelGrid[row][col].setBackground(Color.white);
+                }
+                k++;
+            }
+        }
+        
+        backingPanel.setBorder(BorderFactory.createEmptyBorder(GAP, GAP, GAP, GAP));
+        setPreferredSize(LAYERED_PANE_SIZE);
+        add(backingPanel, JLayeredPane.DEFAULT_LAYER);
+        MyMouseAdapter myMouseAdapter = new MyMouseAdapter();
+        addMouseListener(myMouseAdapter);
+        addMouseMotionListener(myMouseAdapter);
+    }
+    
+    private class MyMouseAdapter extends MouseAdapter {
+        private JLabel dragLabel = null;
+        private int dragLabelWidthDiv2;
+        private int dragLabelHeightDiv2;
+        private JPanel clickedPanel = null;
+        
+        @Override
+        public void mouseClicked(MouseEvent me){
+            clickedPanel = (JPanel) backingPanel.getComponentAt(me.getPoint());
+            Component[] components = clickedPanel.getComponents();
+            
+            BoardCell clickedCell = null;
+            for (int i=0; i<8; i++){
+            	for (int k=0; k<8; k++){
+            		if (panelGrid[i][k]==clickedPanel) {
+            			clickedCell = new BoardCell(i,k);
+            		}
+            	}
+            }
+            
+            //if a piece has not already been selected in this turn, select this piece
+        	//and display it's possible moves if it's a piece owned by the player with the current turn
+            if (!selected){
+            	selected = true;
+            	Piece thisPiece = null;
+            	if (components != null && components.length > 0){
+            		if (components[0] instanceof WhitePawn) thisPiece = new WhitePawn();
+                	if (components[0] instanceof WhiteCastle) thisPiece = new WhiteCastle();
+                	if (components[0] instanceof WhiteBishop) thisPiece = new WhiteBishop();
+                	if (components[0] instanceof WhiteHorse) thisPiece = new WhiteHorse();
+                	if (components[0] instanceof WhiteQueen) thisPiece = new WhiteQueen();
+                	if (components[0] instanceof WhiteKing) thisPiece = new WhiteKing();
+                	if (components[0] instanceof BlackPawn) thisPiece = new BlackPawn();
+                	if (components[0] instanceof BlackCastle) thisPiece = new BlackCastle();
+                	if (components[0] instanceof BlackBishop) thisPiece = new BlackBishop();
+                	if (components[0] instanceof BlackHorse) thisPiece = new BlackHorse();
+                	if (components[0] instanceof BlackQueen) thisPiece = new BlackQueen();
+                	if (components[0] instanceof BlackKing) thisPiece = new BlackKing();
+
+                	selectedPiece = thisPiece;
+                	thisPiece.setCurrentCellOccupied(clickedCell);//input established//System.out.println(thisPawn.getClass()
+                													//+" @ "+clickedCell.getRow()+" "+clickedCell.getCol());
+                	
+                	if (thisPiece != null && ChessGame.isCurrentPlayersPiece(thisPiece)) {
+                		ArrayList<BoardCell> pmoves = ChessGame.getMoves(thisPiece);
+                		if (pmoves != null){
+                			for (BoardCell bc : pmoves){
+                				if (bc.getIsKill())
+                					panelGrid[bc.getRow()][bc.getCol()].add(new Target());
+                				else panelGrid[bc.getRow()][bc.getCol()].add(new PossibleMove());
+                			}
+                		}
+                	}
+            	}
+            }
+        	//if a piece has already been selected and this boardcell is a possible move for that piece, move
+        	//the piece to this clicked boardcell
+            else{
+            	selected = false;
+            	if (components != null && components.length > 0){
+            		if (components[0] instanceof PossibleMove || components[0] instanceof Target) {
+                		//System.out.println(getSelectedPiece().getCurrentCellOccupied().toString()+ " "+getSelectedPiece().getClass());
+                		Piece t = getSelectedPiece();
+                		clearPossibleMovesFromUI();
+                		JLabel t1 = (JLabel) t;
+                		clickedPanel.add(t1);
+                		
+                		//update the board(model)
+                		Move nextMove = new Move(t.getCurrentCellOccupied(), clickedCell, t);
+                		ChessGame.update(nextMove);
+                		
+                		//clear old cell in our view
+                		BoardCell toClear = getSelectedPiece().getCurrentCellOccupied();
+                		t.setCurrentCellOccupied(clickedCell);
+                		panelGrid[toClear.getRow()][toClear.getCol()].remove(0);
+                		
+                		//rotate the board and increment turn
+                		ChessGame.rotateToNextTurn();
+                   	}
+                	else{
+                		clearPossibleMovesFromUI();
+                	}
+            	}
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent me) {
+            clickedPanel = (JPanel) backingPanel.getComponentAt(me.getPoint());
+            Component[] components = clickedPanel.getComponents(); 
+            if (components.length == 0) {
+                return;
+            }
+            // if we click on jpanel that holds a jlabel
+            if (components[0] instanceof JLabel) {
+
+                // remove label from panel
+                dragLabel = (JLabel) components[0];
+                clickedPanel.remove(dragLabel);
+                clickedPanel.revalidate();
+                clickedPanel.repaint();
+
+                dragLabelWidthDiv2 = dragLabel.getWidth() / 2;
+                dragLabelHeightDiv2 = dragLabel.getHeight() / 2;
+
+                int x = me.getPoint().x;// - dragLabelWidthDiv2;
+                int y = me.getPoint().y;// - dragLabelHeightDiv2;
+                
+                if (!(components[0] instanceof PossibleMove)){
+                	dragLabel.setLocation(x, y);
+                    add(dragLabel, JLayeredPane.DRAG_LAYER);
+                }
+                repaint();
+            }
+        }
+
+        @Override
+        public void mouseDragged(MouseEvent me) {
+            if (dragLabel == null) {
+                return;
+            }
+            int x = me.getPoint().x - dragLabelWidthDiv2;
+            int y = me.getPoint().y - dragLabelHeightDiv2;
+            dragLabel.setLocation(x, y);
+            repaint();
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent me) {
+            if (dragLabel == null) {
+                return;
+            }
+            remove(dragLabel); // remove dragLabel for drag layer of JLayeredPane
+            JPanel droppedPanel = (JPanel) backingPanel.getComponentAt(me.getPoint());
+            if (droppedPanel == null) {
+                // if off the grid, return label to home
+                clickedPanel.add(dragLabel);
+                clickedPanel.revalidate();
+            } else {
+                int r = -1;
+                int c = -1;
+                searchPanelGrid: for (int row = 0; row < panelGrid.length; row++) {
+                    for (int col = 0; col < panelGrid[row].length; col++) {
+                        if (panelGrid[row][col] == droppedPanel) {
+                            r = row;
+                            c = col;
+                            break searchPanelGrid;
+                        }
+                    }
+                }
+
+                if (r == -1 || c == -1) {
+                    // if off the grid, return label to home
+                    clickedPanel.add(dragLabel);
+                    clickedPanel.revalidate();
+                } else {
+                	Component[] theseComponents = droppedPanel.getComponents();
+                	if (theseComponents.length == 0){
+                		clickedPanel.add(dragLabel);
+                        clickedPanel.revalidate();
+                	}
+                }
+            }
+
+            repaint();
+            dragLabel = null;
+        }
+    }
+    
+    public static void loadDataToBoardUI(Board b){
+    	int k = 0;
+    	for (String[] x : b.getBoard()){
+    		for (String p : x){
+				BoardCell translated = BoardCell.translate(k);
+    			if (p.equals("b_c")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new BlackCastle());
+    			}
+    			if (p.equals("b_h")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new BlackHorse());
+    			}
+    			if (p.equals("b_b")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new BlackBishop());
+    			}
+    			if (p.equals("b_q")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new BlackQueen());
+    			}
+    			if (p.equals("b_k")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new BlackKing());
+    			}
+    			if (p.equals("b_p")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new BlackPawn());
+    			}
+    			if (p.equals("w_p")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new WhitePawn());
+    			}
+    			if (p.equals("w_c")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new WhiteCastle());
+    			}
+    			if (p.equals("w_h")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new WhiteHorse());
+    			}
+    			if (p.equals("w_b")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new WhiteBishop());
+    			}
+    			if (p.equals("w_q")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new WhiteQueen());
+    			}
+    			if (p.equals("w_k")){
+    				panelGrid[translated.getRow()][translated.getCol()].add(new WhiteKing());
+    			}
+    			k++;
+    		}
+    	}
+    	
+    }
+    
+    public static void clearPossibleMovesFromUI(){
+    	for (int r=0; r<8; r++){
+			for (int c=0; c<8; c++){
+				if (panelGrid[r][c].getComponents().length > 0){
+					Component[] thisPanelsComponents = panelGrid[r][c].getComponents();
+					for (Component x : thisPanelsComponents){
+						if (x instanceof PossibleMove){
+							PossibleMove x1 = (PossibleMove) x;
+							x1.setVisible(false);
+						}
+						else if (x instanceof Target){
+							Target x1 = (Target) x;
+							x1.setVisible(false);
+						}
+					}
+				}
+			}
+		}
+    }
+    
+    public static void clearUI(){
+    	for (JPanel[] x : panelGrid){
+    		for (JPanel y: x){
+    			y.removeAll();
+    		}
+    	}
+    }
+
+    public static void createAndShowUI() {
+        JFrame frame = new JFrame("Chess");
+        frame.getContentPane().add(new GUI());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+}

@@ -4,9 +4,6 @@ import javax.swing.*;
 
 import chess.Board.ChessPiece;
 
-import java.awt.*;
-import java.util.ArrayList;
-
 public class BlackHorse extends JLabel implements Piece{
 	private static ImageIcon img = new ImageIcon("Images\\black-horse.png");
 	private BoardCell currentCellOccupied;

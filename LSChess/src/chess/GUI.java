@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
-import chess.Board.ChessPiece;
 
 public class GUI extends JLayeredPane {
     public static final int WIDTH = 1080;
@@ -26,7 +25,6 @@ public class GUI extends JLayeredPane {
         backingPanel.setLocation(2 * GAP, 2 * GAP);
         backingPanel.setBackground(Color.gray);
         selectedPiece = null;
-        int k=0;
         for (int row = 0; row < GRID_ROWS; row++) {
             for (int col = 0; col < GRID_COLS; col++) {
                 panelGrid[row][col] = new JPanel(new GridBagLayout());
@@ -39,7 +37,6 @@ public class GUI extends JLayeredPane {
                 	if (col%2==0) panelGrid[row][col].setBackground(Color.gray);
                 	else panelGrid[row][col].setBackground(Color.white);
                 }
-                k++;
             }
         }
         

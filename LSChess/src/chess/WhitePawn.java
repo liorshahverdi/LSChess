@@ -4,9 +4,6 @@ import javax.swing.*;
 
 import chess.Board.ChessPiece;
 
-import java.awt.*;
-import java.util.ArrayList;
-
 public class WhitePawn extends JLabel implements Piece{
 	private static ImageIcon img = new ImageIcon("Images\\white-pawn.png");
 	private BoardCell currentCellOccupied;

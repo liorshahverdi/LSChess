@@ -3,9 +3,6 @@ package chess;
 import javax.swing.*;
 
 import chess.Board.ChessPiece;
-
-import java.awt.*;
-
 public class BlackQueen extends JLabel implements Piece{
 	private static ImageIcon img = new ImageIcon("Images\\black-queen.png");
 	private BoardCell currentCellOccupied;

@@ -4,9 +4,7 @@ import javax.swing.*;
 
 import chess.Board.ChessPiece;
 
-import java.awt.*;
-import java.util.ArrayList;
-
+@SuppressWarnings("serial")
 public class BlackBishop extends JLabel implements Piece{
 	private static ImageIcon img = new ImageIcon("Images\\black-bishop.png");
 	private static BoardCell currentCellOccupied;
