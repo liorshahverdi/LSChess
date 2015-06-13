@@ -1148,7 +1148,7 @@ public class Board {
 			dt = 1;
 			boolean collision_left = false;
 			while(!collision_left){
-				if (col-dt <= 1) break;
+				if (col-dt <= -1) break;
 				ChessPiece pm = ChessPiece.getEnum(b[row][col-dt]);
 				if (pm != ChessPiece.EMPTY){
 					if (isWhite(pm)){

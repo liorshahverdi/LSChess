@@ -60,120 +60,128 @@ public class GUI extends JLayeredPane {
         @Override
         public void mouseClicked(MouseEvent me){
             clickedPanel = (JPanel) backingPanel.getComponentAt(me.getPoint());
-            Component[] components = clickedPanel.getComponents();
-            
-            BoardCell clickedCell = null;
-            for (int i=0; i<8; i++){
-            	for (int k=0; k<8; k++){
-            		if (panelGrid[i][k]==clickedPanel) {
-            			clickedCell = new BoardCell(i,k);
-            		}
-            	}
-            }
-            
-            //if a piece has not already been selected in this turn, select this piece
-        	//and display it's possible moves if it's a piece owned by the player with the current turn
-            if (!selected){
-            	selected = true;
-            	Piece thisPiece = null;
-            	if (components != null && components.length > 0){
-            		if (components[0] instanceof WhitePawn) thisPiece = new WhitePawn();
-                	if (components[0] instanceof WhiteCastle) thisPiece = new WhiteCastle();
-                	if (components[0] instanceof WhiteBishop) thisPiece = new WhiteBishop();
-                	if (components[0] instanceof WhiteHorse) thisPiece = new WhiteHorse();
-                	if (components[0] instanceof WhiteQueen) thisPiece = new WhiteQueen();
-                	if (components[0] instanceof WhiteKing) thisPiece = new WhiteKing();
-                	if (components[0] instanceof BlackPawn) thisPiece = new BlackPawn();
-                	if (components[0] instanceof BlackCastle) thisPiece = new BlackCastle();
-                	if (components[0] instanceof BlackBishop) thisPiece = new BlackBishop();
-                	if (components[0] instanceof BlackHorse) thisPiece = new BlackHorse();
-                	if (components[0] instanceof BlackQueen) thisPiece = new BlackQueen();
-                	if (components[0] instanceof BlackKing) thisPiece = new BlackKing();
-
-                	selectedPiece = thisPiece;
-                	thisPiece.setCurrentCellOccupied(clickedCell);//input established//System.out.println(thisPawn.getClass()
-                													//+" @ "+clickedCell.getRow()+" "+clickedCell.getCol());
-                	
-                	if (thisPiece != null && ChessGame.isCurrentPlayersPiece(thisPiece)) {
-                		ArrayList<BoardCell> pmoves = ChessGame.getMoves(thisPiece);
-                		if (pmoves != null){
-                			for (BoardCell bc : pmoves){
-                				panelGrid[bc.getRow()][bc.getCol()].add(new PossibleMove());
-                			}
+            if (clickedPanel != null)
+            {
+            	Component[] components = clickedPanel.getComponents();
+                
+                BoardCell clickedCell = null;
+                for (int i=0; i<8; i++){
+                	for (int k=0; k<8; k++){
+                		if (panelGrid[i][k]==clickedPanel) {
+                			clickedCell = new BoardCell(i,k);
                 		}
                 	}
-            	}
-            }
-        	//if a piece has already been selected and this boardcell is a possible move for that piece, move
-        	//the piece to this clicked boardcell
-            else{
-            	selected = false;
-            	if (components != null && components.length > 0){
-            		if (components[0] instanceof PossibleMove) {
-                		//System.out.println(getSelectedPiece().getCurrentCellOccupied().toString()+ " "+getSelectedPiece().getClass());
-                		Piece t = getSelectedPiece();
-                		clearPossibleMovesFromUI();
-                		JLabel t1 = (JLabel) t;
-                		clickedPanel.add(t1);
-                		
-                		//update the board(model)
-                		Move nextMove = new Move(t.getCurrentCellOccupied(), clickedCell, t);
-                		ChessGame.update(nextMove);
-                		
-                		//clear old cell in our view
-                		BoardCell toClear = getSelectedPiece().getCurrentCellOccupied();
-                		t.setCurrentCellOccupied(clickedCell);
-                		panelGrid[toClear.getRow()][toClear.getCol()].remove(0);
-                		
-                		//rotate the board and increment turn
-                		ChessGame.rotateToNextTurn();
-                   	}
-                	else{
-                		clearPossibleMovesFromUI();
+                }
+                
+                //if a piece has not already been selected in this turn, select this piece
+            	//and display it's possible moves if it's a piece owned by the player with the current turn
+                if (!selected){
+                	selected = true;
+                	Piece thisPiece = null;
+                	if (components != null && components.length > 0){
+                		if (components[0] instanceof WhitePawn) thisPiece = new WhitePawn();
+                    	if (components[0] instanceof WhiteCastle) thisPiece = new WhiteCastle();
+                    	if (components[0] instanceof WhiteBishop) thisPiece = new WhiteBishop();
+                    	if (components[0] instanceof WhiteHorse) thisPiece = new WhiteHorse();
+                    	if (components[0] instanceof WhiteQueen) thisPiece = new WhiteQueen();
+                    	if (components[0] instanceof WhiteKing) thisPiece = new WhiteKing();
+                    	if (components[0] instanceof BlackPawn) thisPiece = new BlackPawn();
+                    	if (components[0] instanceof BlackCastle) thisPiece = new BlackCastle();
+                    	if (components[0] instanceof BlackBishop) thisPiece = new BlackBishop();
+                    	if (components[0] instanceof BlackHorse) thisPiece = new BlackHorse();
+                    	if (components[0] instanceof BlackQueen) thisPiece = new BlackQueen();
+                    	if (components[0] instanceof BlackKing) thisPiece = new BlackKing();
+
+                    	selectedPiece = thisPiece;
+                    	thisPiece.setCurrentCellOccupied(clickedCell);//input established//System.out.println(thisPawn.getClass()
+                    													//+" @ "+clickedCell.getRow()+" "+clickedCell.getCol());
+                    	
+                    	if (thisPiece != null && ChessGame.isCurrentPlayersPiece(thisPiece)) {
+                    		ArrayList<BoardCell> pmoves = ChessGame.getMoves(thisPiece);
+                    		if (pmoves != null){
+                    			for (BoardCell bc : pmoves){
+                    				if (bc.getIsKill())
+                    					panelGrid[bc.getRow()][bc.getCol()].add(new Target());
+                    				else panelGrid[bc.getRow()][bc.getCol()].add(new PossibleMove());
+                    			}
+                    		}
+                    	}
                 	}
-            	}
+                }
+            	//if a piece has already been selected and this boardcell is a possible move for that piece, move
+            	//the piece to this clicked boardcell
+                else{
+                	selected = false;
+                	if (components != null && components.length > 0){
+                		if (components[0] instanceof PossibleMove || components[0] instanceof Target) {
+                    		//System.out.println(getSelectedPiece().getCurrentCellOccupied().toString()+ " "+getSelectedPiece().getClass());
+                    		Piece t = getSelectedPiece();
+                    		clearPossibleMovesFromUI();
+                    		JLabel t1 = (JLabel) t;
+                    		clickedPanel.add(t1);
+                    		
+                    		//update the board(model)
+                    		Move nextMove = new Move(t.getCurrentCellOccupied(), clickedCell, t);
+                    		ChessGame.update(nextMove);
+                    		
+                    		//clear old cell in our view
+                    		BoardCell toClear = getSelectedPiece().getCurrentCellOccupied();
+                    		t.setCurrentCellOccupied(clickedCell);
+                    		panelGrid[toClear.getRow()][toClear.getCol()].remove(0);
+                    		
+                    		//rotate the board and increment turn
+                    		ChessGame.rotateToNextTurn();
+                       	}
+                    	else{
+                    		clearPossibleMovesFromUI();
+                    	}
+                	}
+                }
             }
         }
 
         @Override
         public void mousePressed(MouseEvent me) {
             clickedPanel = (JPanel) backingPanel.getComponentAt(me.getPoint());
-            Component[] components = clickedPanel.getComponents(); 
-            if (components.length == 0) {
-                return;
+            if (clickedPanel!= null){
+	            Component[] components = clickedPanel.getComponents(); 
+	            if (components.length == 0) {
+	                return;
+	            }
+	            // if we click on jpanel that holds a jlabel
+	            if (components[0] instanceof JLabel) {
+	
+	                // remove label from panel
+	                dragLabel = (JLabel) components[0];
+	                clickedPanel.remove(dragLabel);
+	                clickedPanel.revalidate();
+	                clickedPanel.repaint();
+	
+	                dragLabelWidthDiv2 = dragLabel.getWidth() / 2;
+	                dragLabelHeightDiv2 = dragLabel.getHeight() / 2;
+	
+	                int x = me.getPoint().x;// - dragLabelWidthDiv2;
+	                int y = me.getPoint().y;// - dragLabelHeightDiv2;
+	                
+	                if (!(components[0] instanceof PossibleMove)){
+	                	dragLabel.setLocation(x, y);
+	                    add(dragLabel, JLayeredPane.DRAG_LAYER);
+	                }
+	                repaint();
+	            }
             }
-            // if we click on jpanel that holds a jlabel
-            if (components[0] instanceof JLabel) {
-
-                // remove label from panel
-                dragLabel = (JLabel) components[0];
-                clickedPanel.remove(dragLabel);
-                clickedPanel.revalidate();
-                clickedPanel.repaint();
-
-                dragLabelWidthDiv2 = dragLabel.getWidth() / 2;
-                dragLabelHeightDiv2 = dragLabel.getHeight() / 2;
-
-                int x = me.getPoint().x;// - dragLabelWidthDiv2;
-                int y = me.getPoint().y;// - dragLabelHeightDiv2;
-                
-                if (!(components[0] instanceof PossibleMove)){
-                	dragLabel.setLocation(x, y);
-                    add(dragLabel, JLayeredPane.DRAG_LAYER);
-                }
-                repaint();
-            }
+            
         }
 
         @Override
         public void mouseDragged(MouseEvent me) {
-            if (dragLabel == null) {
+            /*if (dragLabel == null) {
                 return;
             }
             int x = me.getPoint().x - dragLabelWidthDiv2;
             int y = me.getPoint().y - dragLabelHeightDiv2;
             dragLabel.setLocation(x, y);
-            repaint();
+            repaint();*/
         }
 
         @Override
@@ -273,6 +281,10 @@ public class GUI extends JLayeredPane {
 					for (Component x : thisPanelsComponents){
 						if (x instanceof PossibleMove){
 							PossibleMove x1 = (PossibleMove) x;
+							x1.setVisible(false);
+						}
+						else if (x instanceof Target){
+							Target x1 = (Target) x;
 							x1.setVisible(false);
 						}
 					}
