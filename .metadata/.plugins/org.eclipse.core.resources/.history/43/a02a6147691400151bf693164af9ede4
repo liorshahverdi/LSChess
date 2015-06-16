@@ -128,7 +128,7 @@ public class Board {
 						p.add(down);
 						if (row+2 <= 7){
 							ChessPiece down2 = ChessPiece.getEnum(b[row+2][col]);
-							if (down2 == ChessPiece.EMPTY && row == 1){
+							if (down2 == ChessPiece.EMPTY){
 								BoardCell upo = new BoardCell(row+2, col);
 								p.add(upo);
 							}
@@ -732,7 +732,7 @@ public class Board {
 						p.add(up);
 						if (row-2 >= 0){
 							ChessPiece up2 = ChessPiece.getEnum(b[row-2][col]);
-							if (up2 == ChessPiece.EMPTY && row == 6){
+							if (up2 == ChessPiece.EMPTY){
 								BoardCell upo = new BoardCell(row-2, col);
 								p.add(upo);
 							}
@@ -764,7 +764,7 @@ public class Board {
 						p.add(down);
 						if (row+2 <= 7){
 							ChessPiece down2 = ChessPiece.getEnum(b[row+2][col]);
-							if (down2 == ChessPiece.EMPTY && row == 1){
+							if (down2 == ChessPiece.EMPTY){
 								BoardCell upo = new BoardCell(row+2, col);
 								p.add(upo);
 							}
