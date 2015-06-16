@@ -90,18 +90,21 @@ public class GUI extends JLayeredPane {
                     	if (components[0] instanceof BlackKing) thisPiece = new BlackKing();
 
                     	selectedPiece = thisPiece;
-                    	thisPiece.setCurrentCellOccupied(clickedCell);//input established//System.out.println(thisPawn.getClass()
-                    													//+" @ "+clickedCell.getRow()+" "+clickedCell.getCol());
-                    	
-                    	if (thisPiece != null && ChessGame.isCurrentPlayersPiece(thisPiece)) {
-                    		ArrayList<BoardCell> pmoves = ChessGame.getMoves(thisPiece);
-                    		if (pmoves != null){
-                    			for (BoardCell bc : pmoves){
-                    				if (bc.getIsKill())
-                    					panelGrid[bc.getRow()][bc.getCol()].add(new Target());
-                    				else panelGrid[bc.getRow()][bc.getCol()].add(new PossibleMove());
-                    			}
-                    		}
+                    	if (thisPiece != null)
+                    	{
+                    		thisPiece.setCurrentCellOccupied(clickedCell);//input established//System.out.println(thisPawn.getClass()
+							//+" @ "+clickedCell.getRow()+" "+clickedCell.getCol());
+
+							if (thisPiece != null && ChessGame.isCurrentPlayersPiece(thisPiece)) {
+								ArrayList<BoardCell> pmoves = ChessGame.getMoves(thisPiece);
+								if (pmoves != null){
+									for (BoardCell bc : pmoves){
+										if (bc.getIsKill())
+											panelGrid[bc.getRow()][bc.getCol()].add(new Target());
+										else panelGrid[bc.getRow()][bc.getCol()].add(new PossibleMove());
+									}
+								}
+							}
                     	}
                 	}
                 }
@@ -115,19 +118,20 @@ public class GUI extends JLayeredPane {
                     		Piece t = getSelectedPiece();
                     		clearPossibleMovesFromUI();
                     		JLabel t1 = (JLabel) t;
-                    		clickedPanel.add(t1);
-                    		
-                    		//update the board(model)
-                    		Move nextMove = new Move(t.getCurrentCellOccupied(), clickedCell, t);
-                    		ChessGame.update(nextMove);
-                    		
-                    		//clear old cell in our view
-                    		BoardCell toClear = getSelectedPiece().getCurrentCellOccupied();
-                    		t.setCurrentCellOccupied(clickedCell);
-                    		panelGrid[toClear.getRow()][toClear.getCol()].remove(0);
-                    		
-                    		//rotate the board and increment turn
-                    		ChessGame.rotateToNextTurn();
+                    		if (t1 != null) {
+                    			clickedPanel.add(t1);
+                    			//update the board(model)
+                        		Move nextMove = new Move(t.getCurrentCellOccupied(), clickedCell, t);
+                        		ChessGame.update(nextMove);
+                        		
+                        		//clear old cell in our view
+                        		BoardCell toClear = getSelectedPiece().getCurrentCellOccupied();
+                        		t.setCurrentCellOccupied(clickedCell);
+                        		panelGrid[toClear.getRow()][toClear.getCol()].remove(0);
+                        		
+                        		//rotate the board and increment turn
+                        		ChessGame.rotateToNextTurn();
+                    		}
                        	}
                     	else{
                     		clearPossibleMovesFromUI();

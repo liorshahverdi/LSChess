@@ -9,12 +9,12 @@ public class Board {
 				
 				/*{"-",  "b_k"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-","-"  ,"-"  ,"-"},
-				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"w_c"  ,"-"},
-				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
-				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
+				{"-",  "w_p"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
+				{"-",  "-"  ,"w_p"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
+				{"-",  "-"  ,"-"  ,"w_p"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
 				{"-", "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"},
-				{"w_c",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"}*/
+				{"-",  "-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"  ,"-"}*/
 				
 				{"b_c","b_h","b_b","b_q","b_k","b_b","b_h","b_c"},
 				{"b_p","b_p","b_p","b_p","b_p","b_p","b_p","b_p"},
@@ -87,37 +87,71 @@ public class Board {
 		
 		public static ArrayList<BoardCell> whitePawnPossibleMoves(int row, int col, String[][] b){
 			ArrayList<BoardCell> p = new ArrayList<BoardCell>();
-			
-			if (row-1 >= 0){
-				//move up 1
-				if (ChessPiece.getEnum(b[row-1][col]) == ChessPiece.EMPTY){
-					BoardCell move = new BoardCell(row-1, col);
-					p.add(move);
-				}
-				if (col-1 >= 0){
-					if (ChessPiece.getEnum(b[row-1][col-1]) != ChessPiece.EMPTY && isBlack(ChessPiece.getEnum(board[row-1][col-1]))){
-						BoardCell move = new BoardCell(row-1, col-1);
-						move.setIsKill(true);//kill black piece in relative top-left cell
-						p.add(move);
+			int turn = ChessGame.getThisTurnsPlayer();
+			if (turn == 1){
+				if (row-1 >= 0){
+					ChessPiece op = ChessPiece.getEnum(b[row-1][col]);
+					if (op == ChessPiece.EMPTY){
+						BoardCell up = new BoardCell(row-1, col);
+						p.add(up);
+						if (row-2 >= 0){
+							ChessPiece up2 = ChessPiece.getEnum(b[row-2][col]);
+							if (up2 == ChessPiece.EMPTY){
+								BoardCell upo = new BoardCell(row-2, col);
+								p.add(upo);
+							}
+						}
 					}
-				}
-				if (col+1 <= 7){
-					if (ChessPiece.getEnum(b[row-1][col+1]) != ChessPiece.EMPTY && isBlack(ChessPiece.getEnum(board[row-1][col+1]))){
-						BoardCell move = new BoardCell(row-1, col+1);
-						move.setIsKill(true);//kill black piece in relative top-right cell
-						p.add(move);
+					if (col-1 >= 0){
+						ChessPiece opa = ChessPiece.getEnum(b[row-1][col-1]);
+						if (opa != ChessPiece.EMPTY && isBlack(opa)){
+							BoardCell up_left = new BoardCell(row-1,col-1);
+							up_left.setIsKill(true);
+							p.add(up_left);
+						}
 					}
-				}
-				if (row-2 >= 0){
-					//move up 2
-					if (row==6 && ChessPiece.getEnum(b[row-2][col]) == ChessPiece.EMPTY &&
-							ChessPiece.getEnum(b[row-1][col]) == ChessPiece.EMPTY){
-						BoardCell move = new BoardCell(row-2, col);//move up 2 from initial starting cell
-						p.add(move);
+					if (col+1 <= 7){
+						ChessPiece opb = ChessPiece.getEnum(b[row-1][col+1]);
+						if (opb != ChessPiece.EMPTY && isBlack(opb)){
+							BoardCell up_right = new BoardCell(row-1,col+1);
+							up_right.setIsKill(true);
+							p.add(up_right);
+						}
 					}
 				}
 			}
-			
+			else {
+				if (row+1 <= 7){
+					ChessPiece op = ChessPiece.getEnum(b[row+1][col]);
+					if (op == ChessPiece.EMPTY){
+						BoardCell down = new BoardCell(row+1, col);
+						p.add(down);
+						if (row+2 <= 7){
+							ChessPiece down2 = ChessPiece.getEnum(b[row+2][col]);
+							if (down2 == ChessPiece.EMPTY){
+								BoardCell upo = new BoardCell(row+2, col);
+								p.add(upo);
+							}
+						}
+					}
+					if (col-1 >= 0){
+						ChessPiece opa = ChessPiece.getEnum(b[row+1][col-1]);
+						if (opa != ChessPiece.EMPTY && isBlack(opa)){
+							BoardCell up_left = new BoardCell(row+1,col-1);
+							up_left.setIsKill(true);
+							p.add(up_left);
+						}
+					}
+					if (col+1 <= 7){
+						ChessPiece opb = ChessPiece.getEnum(b[row+1][col+1]);
+						if (opb != ChessPiece.EMPTY && isBlack(opb)){
+							BoardCell up_right = new BoardCell(row+1,col+1);
+							up_right.setIsKill(true);
+							p.add(up_right);
+						}
+					}
+				}
+			}
 			return p;
 		}
 		
@@ -689,37 +723,71 @@ public class Board {
 		
 		public static ArrayList<BoardCell> blackPawnPossibleMoves(int row, int col, String[][] b){
 			ArrayList<BoardCell> p = new ArrayList<BoardCell>();
-			
-			if (row-1 >= 0){
-				//move up 1
-				if (ChessPiece.getEnum(b[row-1][col]) == ChessPiece.EMPTY){
-					BoardCell move = new BoardCell(row-1, col);
-					p.add(move);
-				}
-				if (col-1 >= 0){
-					if (ChessPiece.getEnum(b[row-1][col-1]) != ChessPiece.EMPTY && isWhite(ChessPiece.getEnum(board[row-1][col-1]))){
-						BoardCell move = new BoardCell(row-1, col-1);
-						move.setIsKill(true);//kill black piece in relative top-left cell
-						p.add(move);
+			int turn = ChessGame.getThisTurnsPlayer();
+			if (turn == 2){
+				if (row-1 >= 0){
+					ChessPiece op = ChessPiece.getEnum(b[row-1][col]);
+					if (op == ChessPiece.EMPTY){
+						BoardCell up = new BoardCell(row-1, col);
+						p.add(up);
+						if (row-2 >= 0){
+							ChessPiece up2 = ChessPiece.getEnum(b[row-2][col]);
+							if (up2 == ChessPiece.EMPTY){
+								BoardCell upo = new BoardCell(row-2, col);
+								p.add(upo);
+							}
+						}
 					}
-				}
-				if (col+1 <= 7){
-					if (ChessPiece.getEnum(b[row-1][col+1]) != ChessPiece.EMPTY && isWhite(ChessPiece.getEnum(board[row-1][col+1]))){
-						BoardCell move = new BoardCell(row-1, col+1);
-						move.setIsKill(true);//kill black piece in relative top-right cell
-						p.add(move);
+					if (col-1 >= 0){
+						ChessPiece opa = ChessPiece.getEnum(b[row-1][col-1]);
+						if (opa != ChessPiece.EMPTY && isWhite(opa)){
+							BoardCell up_left = new BoardCell(row-1,col-1);
+							up_left.setIsKill(true);
+							p.add(up_left);
+						}
 					}
-				}
-				if (row-2 >= 0){
-					//move up 2
-					if (row==6 && ChessPiece.getEnum(b[row-2][col]) == ChessPiece.EMPTY &&
-							ChessPiece.getEnum(b[row-1][col]) == ChessPiece.EMPTY){
-						BoardCell move = new BoardCell(row-2, col);//move up 2 from initial starting cell
-						p.add(move);
+					if (col+1 <= 7){
+						ChessPiece opb = ChessPiece.getEnum(b[row-1][col+1]);
+						if (opb != ChessPiece.EMPTY && isWhite(opb)){
+							BoardCell up_right = new BoardCell(row-1,col+1);
+							up_right.setIsKill(true);
+							p.add(up_right);
+						}
 					}
 				}
 			}
-			
+			else {
+				if (row+1 <= 7){
+					ChessPiece op = ChessPiece.getEnum(b[row+1][col]);
+					if (op == ChessPiece.EMPTY){
+						BoardCell down = new BoardCell(row+1, col);
+						p.add(down);
+						if (row+2 <= 7){
+							ChessPiece down2 = ChessPiece.getEnum(b[row+2][col]);
+							if (down2 == ChessPiece.EMPTY){
+								BoardCell upo = new BoardCell(row+2, col);
+								p.add(upo);
+							}
+						}
+					}
+					if (col-1 >= 0){
+						ChessPiece opa = ChessPiece.getEnum(b[row+1][col-1]);
+						if (opa != ChessPiece.EMPTY && isWhite(opa)){
+							BoardCell up_left = new BoardCell(row+1,col-1);
+							up_left.setIsKill(true);
+							p.add(up_left);
+						}
+					}
+					if (col+1 <= 7){
+						ChessPiece opb = ChessPiece.getEnum(b[row+1][col+1]);
+						if (opb != ChessPiece.EMPTY && isWhite(opb)){
+							BoardCell up_right = new BoardCell(row+1,col+1);
+							up_right.setIsKill(true);
+							p.add(up_right);
+						}
+					}
+				}
+			}
 			return p;
 		}
 		
@@ -1436,6 +1504,7 @@ public class Board {
 					}
 				}
 			}
+			
 			
 			return p;
 		}

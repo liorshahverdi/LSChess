@@ -1,8 +1,8 @@
 package chess;
 import javax.swing.*;
 import java.util.*;
-
-public class ChessGame {
+import java.applet.*;
+public class ChessGame{
 	
 	private static Board model;//model
 	private static GUI view;//view
@@ -82,23 +82,19 @@ public class ChessGame {
 	public static void rotateToNextTurn(){
 		Board b = getBoard();
 		Board.flipMat(b.getBoard());
-		//model.printForP1();
 		view.clearUI();
 		view.loadDataToBoardUI(model);
-		
 		if (!Board.ChessPiece.willLeaveUsInCheck(b.getBoard())) check = false;
+		ct++;
 		ArrayList<Move> post_move_ops = Board.ChessPiece.possibleMoves(b.getBoard());
 		for (Move x : post_move_ops){
 			Piece targetPiece = x.getTargetedPiece();
-			if (getThisTurnsPlayer()==1 && targetPiece instanceof BlackKing) check = true;
-			else if (getThisTurnsPlayer()==2 && targetPiece instanceof WhiteKing) check = true;
+			if (getThisTurnsPlayer()==1 && targetPiece instanceof WhiteKing) check = true;
+			else if (getThisTurnsPlayer()==2 && targetPiece instanceof BlackKing) check = true;
 		}
-		
-		ct++;
-		
 		boolean dontKeepPlaying = gameOver();
 		if (dontKeepPlaying){
-			JOptionPane.showMessageDialog(view, getOppositeTurnsPlayer()+" Won by Checkmate");
+			JOptionPane.showMessageDialog(view, getOppositeTurnsPlayer()+" Won By Checkmate");
 			System.exit(0);
 		}
 	}
@@ -136,6 +132,7 @@ public class ChessGame {
 	public static void main(String[] args){
 		java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+            	JOptionPane.showMessageDialog(view, "Welcome to LSChess! Let's Play!");
                 ChessGame cg = new ChessGame();
             	view.createAndShowUI();
                 view.loadDataToBoardUI(model);

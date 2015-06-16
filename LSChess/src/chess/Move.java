@@ -25,6 +25,8 @@ public class Move {
 	public Piece getMovedPiece() { return movedPiece; }
 	public Piece getTargetedPiece() { return targetedPiece; }
 	
-	public String toString(){ return "From="+this.fromCell.toString()+"\tTo="+this.toCell.toString()
-			+"\tmovedPiece="+this.movedPiece.getClass(); }
+	public String toString(){ 
+		if (this.targetedPiece == null) return "from="+this.fromCell.toString()+" to="+this.toCell.toString()+" "+this.movedPiece.getClass();
+		else return "from="+this.fromCell.toString()+" to="+this.toCell.toString()+" "+this.movedPiece.getClass()+" "+this.targetedPiece.getClass();
+	}
 }
